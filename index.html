@@ -1,0 +1,3011 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://n6wxm.com">
+    <link rel="preconnect" href="https://nap5k.com">
+    <link rel="preconnect" href="https://5gvci.com">
+
+    <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js">
+    <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tauiker Store | Ofertas Selecionadas em Tech e Lifestyle</title>
+    <meta name="description" content="Sua central de ofertas selecionadas. Eletrônicos, moda, casa e muito mais com os melhores preços.">
+    <meta name="theme-color" content="#0f172a">
+
+    <meta property="og:type"        content="website" id="og-type">
+    <meta property="og:site_name"   content="Tauiker Store">
+    <meta property="og:title"       content="Tauiker Store | Ofertas Selecionadas" id="og-title">
+    <meta property="og:description" content="Qualidade em cada achadinho. Sua central de ofertas selecionadas." id="og-desc">
+    <meta property="og:url"         content="https://tauiker.com" id="og-url">
+    <meta property="og:image"       content="https://tauiker.com/og-default.jpg" id="og-image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap">
+    </noscript>
+
+    <link rel="preload" as="style"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css"
+          crossorigin="anonymous"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css"
+          crossorigin="anonymous"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css"
+          crossorigin="anonymous"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" crossorigin="anonymous">
+    </noscript>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHHJ40376Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-PHHJ40376Q', { send_page_view: false });
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9953522983252669" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.5/purify.min.js"
+            crossorigin="anonymous"
+            async
+            id="dompurify-script"></script>
+    <script>
+        window.domPurifyReady = new Promise(function(resolve) {
+            var el = document.getElementById('dompurify-script');
+            if (!el) { resolve(null); return; }
+            el.addEventListener('load',  function() { resolve(window.DOMPurify || null); });
+            el.addEventListener('error', function() { resolve(null); });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+    <aside class="nav-drawer" id="navDrawer" role="navigation" aria-label="Menu principal">
+        <button class="nav-drawer__close" id="navClose" aria-label="Fechar menu">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+        <a href="#/" class="nav-drawer__brand" aria-label="Ir para a página inicial">TAUIKER<span>STORE</span></a>
+        <ul class="nav-drawer__links" id="navDrawerLinks">
+            <li><a href="#/" data-nav-href="#/">
+                <i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
+            <li class="drawer-divider" aria-hidden="true">Produtos</li>
+            <li><a href="#/categoria/todos" data-nav-href="#/categoria/todos">
+                <i class="fas fa-th-large" aria-hidden="true"></i> Todos os Produtos</a></li>
+            <li><a href="#/categoria/moda" data-nav-href="#/categoria/moda">
+                <i class="fas fa-tshirt" aria-hidden="true"></i> Roupas</a></li>
+            <li><a href="#/categoria/tech" data-nav-href="#/categoria/tech">
+                <i class="fas fa-microchip" aria-hidden="true"></i> Eletrônicos</a></li>
+            <li><a href="#/categoria/casa" data-nav-href="#/categoria/casa">
+                <i class="fas fa-couch" aria-hidden="true"></i> Casa</a></li>
+            <li><a href="#/categoria/promo" data-nav-href="#/categoria/promo">
+                <i class="fas fa-fire" aria-hidden="true"></i> Promoções</a></li>
+            <li><a href="#/wishlist" data-nav-href="#/wishlist">
+                <i class="fas fa-heart" style="color:#ef4444" aria-hidden="true"></i> Minha Lista</a></li>
+            <li class="drawer-divider" aria-hidden="true">Conteúdo</li>
+            <li><a href="#/news" data-nav-href="#/news">
+                <i class="fas fa-newspaper" aria-hidden="true"></i> Novidades</a></li>
+            <li class="drawer-divider" aria-hidden="true">Institucional</li>
+            <li><a href="#/politica" data-nav-href="#/politica">
+                <i class="fas fa-shield-alt" aria-hidden="true"></i> Privacidade</a></li>
+            <li><a href="#/termos" data-nav-href="#/termos">
+                <i class="fas fa-file-alt" aria-hidden="true"></i> Termos de Uso</a></li>
+            <li><a href="#/contato" data-nav-href="#/contato">
+                <i class="fas fa-comment-dots" aria-hidden="true"></i> Contato</a></li>
+        </ul>
+    </aside>
+
+    <header class="main-header" id="mainHeader" role="banner">
+        <div class="container header-grid">
+            <a href="#/" class="logo" aria-label="Tauiker Store — Página inicial">TAUIKER<span>STORE</span></a>
+
+            <nav class="nav-desktop" role="navigation" aria-label="Navegação principal">
+                <ul class="nav-links" id="navDesktopLinks">
+                    <li><a href="#/" data-nav-href="#/">Home</a></li>
+                    <li class="dropdown">
+                        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">
+                            Produtos <i class="fas fa-caret-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-content" role="menu">
+                            <a href="#/categoria/todos" role="menuitem">
+                                <i class="fas fa-th-large" aria-hidden="true"></i> Todos os Produtos
+                            </a>
+                            <a href="#/categoria/moda" role="menuitem">
+                                <i class="fas fa-tshirt" aria-hidden="true"></i> Roupas
+                            </a>
+                            <a href="#/categoria/tech" role="menuitem">
+                                <i class="fas fa-microchip" aria-hidden="true"></i> Eletrônicos
+                            </a>
+                            <a href="#/categoria/casa" role="menuitem">
+                                <i class="fas fa-couch" aria-hidden="true"></i> Casa
+                            </a>
+                            <a href="#/categoria/promo" role="menuitem">
+                                <i class="fas fa-fire" aria-hidden="true"></i> Promoções
+                            </a>
+                        </div>
+                    </li>
+                    <li><a href="#/news" data-nav-href="#/news">Novidades</a></li>
+                    <li><a href="#/wishlist" data-nav-href="#/wishlist">
+                        Minha Lista <i class="fas fa-heart" style="color:#ef4444;font-size:0.72rem" aria-hidden="true"></i>
+                    </a></li>
+                    <li><a href="#/contato" data-nav-href="#/contato">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <div class="search-box" id="searchBox" role="search">
+                    <input type="search" id="searchInput"
+                           placeholder="Buscar produtos..."
+                           aria-label="Buscar produtos e conteúdo"
+                           autocomplete="off">
+                    <button class="search-clear-btn" id="searchClearBtn"
+                            aria-label="Limpar busca" type="button">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <a href="#/wishlist" class="wishlist-btn" id="wishlistBtn"
+                   aria-label="Minha lista de desejos"
+                   data-nav-href="#/wishlist">
+                    <i class="fas fa-heart" aria-hidden="true"></i>
+                    <span class="wishlist-badge" id="wishlistBadge" style="display:none">0</span>
+                </a>
+                <button class="nav-toggle" id="navToggle"
+                        aria-label="Abrir menu de navegação"
+                        aria-expanded="false"
+                        aria-controls="navDrawer">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="ad-sticky-desktop" id="adStickyDesktop" aria-hidden="true">
+        <div class="ad-slot" data-ad-position="desktop-sticky"></div>
+    </div>
+
+    <main id="app" class="app-view" role="main" aria-live="polite" aria-atomic="false">
+        <div class="hero-banner" aria-hidden="true">
+            <div class="container">
+                <h1>Tauiker <span>Store</span></h1>
+                <p>Qualidade em cada achadinho.</p>
+            </div>
+        </div>
+        <div class="container page-feed" aria-hidden="true">
+            <div class="products-grid" aria-label="Carregando produtos...">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="fomo-bar" id="fomoBar" aria-hidden="true" style="display:none"></div>
+
+    <div class="anchor-ad-container" id="anchorAdContainer" aria-hidden="true">
+        <div class="ad-slot" data-ad-position="anchor-mobile"></div>
+    </div>
+
+    <!-- Modal de compartilhamento para desktop -->
+    <div id="shareModal" class="share-modal" aria-hidden="true" role="dialog" aria-label="Compartilhar">
+        <div class="share-modal__backdrop" onclick="window.closeShareModal()"></div>
+        <div class="share-modal__box">
+            <div class="share-modal__header">
+                <span><i class="fas fa-share-alt" aria-hidden="true"></i> Compartilhar</span>
+                <button class="share-modal__close" onclick="window.closeShareModal()" aria-label="Fechar modal de compartilhamento">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="share-modal__options">
+                <a class="share-modal__wa share-modal__option" target="_blank" rel="noopener noreferrer" onclick="window.closeShareModal()">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+                </a>
+                <a class="share-modal__tg share-modal__option" target="_blank" rel="noopener noreferrer" onclick="window.closeShareModal()">
+                    <i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram
+                </a>
+                <button class="share-modal__copy-link share-modal__option" type="button">
+                    <i class="fas fa-link" aria-hidden="true"></i> Copiar link
+                </button>
+                <button class="share-modal__copy-text share-modal__option" type="button">
+                    <i class="fas fa-copy" aria-hidden="true"></i> Copiar texto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#/" class="logo footer-logo" aria-label="Tauiker Store">TAUIKER<span>STORE</span></a>
+                <p>Qualidade em cada achadinho. Sua central de ofertas selecionadas em tech e lifestyle.</p>
+                <div class="footer-contacts">
+                    <a href="https://chat.whatsapp.com/GA5oIfwFgZBJXdH2TYGkVG?mode=gi_t"
+                       class="contact-link contact-link--whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        <span>
+                            <strong>Grupo WhatsApp</strong>
+                            <em>Entrar no grupo de ofertas</em>
+                        </span>
+                    </a>
+                    <a href="https://wa.me/5563981050019"
+                       class="contact-link contact-link--whatsapp" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        <span>
+                            <strong>WhatsApp Pessoal</strong>
+                            <em>+55 63 98105-0019</em>
+                        </span>
+                    </a>
+                    <a href="https://t.me/tauikerstore"
+                       class="contact-link contact-link--telegram" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                        <span>
+                            <strong>Canal Telegram</strong>
+                            <em>@tauikerstore</em>
+                        </span>
+                    </a>
+                    <a href="https://t.me/tauikerstores"
+                       class="contact-link contact-link--telegram" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                        <span>
+                            <strong>Telegram Pessoal</strong>
+                            <em>@tauikerstores</em>
+                        </span>
+                    </a>
+                    <a href="mailto:tauikerstore@gmail.com"
+                       class="contact-link contact-link--email">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>
+                            <strong>E-mail</strong>
+                            <em>tauikerstore@gmail.com</em>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Produtos</h4>
+                <ul>
+                    <li><a href="#/categoria/todos">Todos</a></li>
+                    <li><a href="#/categoria/moda">Roupas</a></li>
+                    <li><a href="#/categoria/tech">Eletrônicos</a></li>
+                    <li><a href="#/categoria/casa">Casa</a></li>
+                    <li><a href="#/categoria/promo">Promoções</a></li>
+                    <li><a href="#/wishlist">Minha Lista</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Conteúdo</h4>
+                <ul>
+                    <li><a href="#/news">Novidades</a></li>
+                    <li><a href="#/categoria/review">Reviews</a></li>
+                    <li><a href="#/categoria/blog">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a href="#/politica">Privacidade</a></li>
+                    <li><a href="#/termos">Termos de Uso</a></li>
+                    <li><a href="#/contato">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Tauiker Store &mdash; Todos os direitos reservados.
+                   <span class="footer-affil">Os links de produtos podem ser links de afiliados.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp }                                            from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue, query, orderByChild,
+                 limitToLast, update, increment, push, get, equalTo }      from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey:            "AIzaSyDS92Ecxr3rc-sKJSRswVdOv9TZHxgDars",
+            authDomain:        "tauiker-store-oficial.firebaseapp.com",
+            databaseURL:       "https://tauiker-store-oficial-default-rtdb.firebaseio.com",
+            projectId:         "tauiker-store-oficial",
+            storageBucket:     "tauiker-store-oficial.firebasestorage.app",
+            messagingSenderId: "898153808909",
+            appId:             "1:898153808909:web:1f6d2bb2c756e64e32c144"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db  = getDatabase(app);
+
+        const CONFIG = {
+            POSTS_LIMIT: 200,
+
+            AD_CLIENT: 'ca-pub-9953522983252669',
+
+            AD_SLOTS: {
+                atf:            '',
+                desktopSticky:  '',
+                feed1:          '',
+                feed2:          '',
+                feed3:          '',
+                feedInline1:    '',
+                feedInline2:    '',
+                feedInline3:    '',
+                productBottom:  '',
+                articleTop:     '',
+                articleInline1: '',
+                articleInline2: '',
+                articleInline3: '',
+                articleBottom:  '',
+                articleBottom2: '',
+                anchorMobile:   ''
+            },
+
+            OG_DEFAULT_IMAGE: 'https://tauiker.com/og-default.jpg',
+
+            SCARCITY_MESSAGES: [
+                '🔥 Alta demanda agora',
+                '⚡ Últimas unidades',
+                '👀 Muitos olhando isso',
+                '⏰ Oferta por tempo limitado',
+                '🛒 Quase esgotado',
+                '📦 Estoque baixo',
+                '🏃 Corre — poucas unidades!'
+            ],
+
+            SCARCITY_MESSAGES_BY_CAT: {
+                tech:  ['⚡ Estoque baixo — última unidade em tech','🔥 Gadget quase esgotado','💻 Alta demanda em eletrônicos'],
+                moda:  ['👗 Últimos tamanhos disponíveis','🏃 Corre — peça quase esgotada','🔥 Alta demanda em moda'],
+                casa:  ['🏠 Última unidade em casa','📦 Estoque baixo em decoração','⚡ Oferta de casa por tempo limitado'],
+                promo: ['💥 Promoção quase encerrando','⏰ Desconto por tempo limitado','🛒 Últimas unidades em promoção']
+            },
+
+            SCARCITY_MIN_DISCOUNT: 10,
+
+            FOMO_DELAY_MS: 5000,
+
+            FOMO_INTERVAL_MS: 45000,
+
+            AD_INJECT_INTERVAL: 3,
+
+            HERO_COUNTDOWN_DURATION_S: 900,
+
+            RECENTLY_VIEWED_LIMIT: 8,
+
+            RECENTLY_VIEWED_KEY:   'ts_rv_ids',
+
+            WISHLIST_KEY: 'ts_wl_ids'
+        };
+
+        let allPosts = [];
+        const postMap = new Map();
+
+        const CAT_NAMES = {
+            todos:  'Todos os Produtos',
+            moda:   'Roupas',
+            tech:   'Eletrônicos',
+            casa:   'Casa',
+            promo:  'Promoções',
+            review: 'Reviews',
+            blog:   'Blog'
+        };
+
+        const CAT_COLORS = {
+            moda:  'var(--section-blog)',
+            tech:  'var(--section-produto)',
+            casa:  'var(--green)',
+            promo: 'var(--danger)',
+            geral: 'var(--gray)'
+        };
+
+        const SECTION_CONFIG = {
+            news:    { title: 'NOVIDADES',  icon: 'fas fa-bolt',          cardFn: () => buildNewsCard,    gridClass: 'news-grid'     },
+            produto: { title: 'PRODUTOS',   icon: 'fas fa-tag',           cardFn: () => buildProductCard, gridClass: 'products-grid' },
+            review:  { title: 'REVIEWS',    icon: 'fas fa-star-half-alt', cardFn: () => buildBlogCard,    gridClass: 'products-grid' },
+            blog:    { title: 'BLOG',       icon: 'fas fa-newspaper',     cardFn: () => buildBlogCard,    gridClass: 'products-grid' },
+        };
+
+        const HOME_ORDER = ['produto', 'news', 'review', 'blog'];
+        const NEWS_ORDER = ['news', 'review', 'blog'];
+
+        const getTipo = (p) => p.tipo || 'produto';
+
+        /* [I6] normalizeLink + UTM automático para Amazon/AliExpress */
+        function normalizeLink(link) {
+            if (!link) return '#';
+            return link.startsWith('http') ? link : `https://${link}`;
+        }
+
+        function normalizeAffiliateLink(link, productId) {
+            if (!link) return '#';
+            const full = link.startsWith('http') ? link : `https://${link}`;
+            try {
+                const url = new URL(full);
+                const h = url.hostname;
+                const isAmazon   = h.includes('amazon.com') || h.includes('amzn.to') || h.includes('amzn.com');
+                const isAli      = h.includes('aliexpress.com') || h.includes('s.click.aliexpress');
+                const isShopee   = h.includes('shopee.com.br') || h.includes('shope.ee');
+                const isML       = h.includes('mercadolivre.com.br') || h.includes('mercadolibre.com');
+                const isMagalu   = h.includes('magazineluiza.com.br') || h.includes('magalu.com');
+                const isKabum    = h.includes('kabum.com.br');
+
+                if (isAmazon || isAli || isShopee || isML || isMagalu || isKabum) {
+                    url.searchParams.set('utm_source', 'tauiker');
+                    url.searchParams.set('utm_medium', 'affiliate');
+                    if (productId) url.searchParams.set('utm_content', productId);
+                    if (isAmazon)  url.searchParams.set('tag', 'tauikerstore-20');
+                }
+                return url.toString();
+            } catch (_) { return full; }
+        }
+
+        /* [N3/P4] Proxy de imagens via weserv.nl */
+        function optimizeImageUrl(url) {
+            if (!url || !url.startsWith('http')) return url;
+            return 'https://images.weserv.nl/?url=' + encodeURIComponent(url) + '&w=400&output=webp&q=80';
+        }
+
+        const getSiteUrl = (p) => {
+            const base = window.location.origin + window.location.pathname;
+            return `${base}#/${getTipo(p)}/${p.id}`;
+        };
+
+        const normalizeNum = (v) =>
+            parseFloat((v || '0').toString().replace(',', '.').replace(/[^0-9.]/g, '')) || 0;
+
+        function formatDate(ts) {
+            if (!ts) return '';
+            const diff = Date.now() - ts;
+            if (diff < 60000)     return 'agora';
+            if (diff < 3600000)   return `${Math.floor(diff / 60000)}min atrás`;
+            if (diff < 86400000)  return `${Math.floor(diff / 3600000)}h atrás`;
+            if (diff < 604800000) return `${Math.floor(diff / 86400000)}d atrás`;
+            const d = new Date(ts);
+            return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: '2-digit' });
+        }
+
+        function calcPrice(p) {
+            const pAntigo  = normalizeNum(p.preco_antigo);
+            const desc     = normalizeNum(p.desconto);
+            const precoRaw = (p.preco || '').toString().trim();
+
+            let pFinal;
+            if (precoRaw !== '') {
+                const parsed = normalizeNum(precoRaw);
+                pFinal = parsed > 0
+                    ? parsed.toFixed(2).replace('.', ',')
+                    : precoRaw;
+            } else if (pAntigo > 0 && desc > 0) {
+                pFinal = (pAntigo - (pAntigo * desc / 100)).toFixed(2).replace('.', ',');
+            } else {
+                pFinal = '0,00';
+            }
+
+            return { pFinal, pAntigo, desc };
+        }
+
+        function calcSavings(p) {
+            const pAntigo = normalizeNum(p.preco_antigo);
+            const desc    = normalizeNum(p.desconto);
+            if (pAntigo > 0 && desc > 0) {
+                return (pAntigo * desc / 100).toFixed(2).replace('.', ',');
+            }
+            return null;
+        }
+
+        function debounce(fn, delay) {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => fn(...args), delay);
+            };
+        }
+
+        function showToast(msg, type = '', onClick) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.className   = `toast show${type ? ' ' + type : ''}`;
+            clearTimeout(el._t);
+            el.onclick = onClick || null;
+            el._t = setTimeout(() => { el.className = 'toast'; el.onclick = null; }, 2800);
+        }
+
+        function updateOG({ title, description, url, image, type = 'article' }) {
+            const set = (id, val) => {
+                const el = document.getElementById(id);
+                if (el && val) el.setAttribute('content', val);
+            };
+            set('og-title', title);
+            set('og-desc', description);
+            set('og-url', url);
+            set('og-image', image || CONFIG.OG_DEFAULT_IMAGE);
+            set('og-type', type);
+        }
+
+        function setCanonical(url) {
+            let el = document.getElementById('canonical-link');
+            if (!el) {
+                el = document.createElement('link');
+                el.rel = 'canonical';
+                el.id  = 'canonical-link';
+                document.head.appendChild(el);
+            }
+            el.href = url;
+        }
+
+        function detectAdBlock() {
+            const probe = document.createElement('ins');
+            probe.className             = 'adsbygoogle';
+            probe.style.cssText         = 'display:block;position:absolute;top:-9999px;left:-9999px;width:1px;height:1px';
+            probe.setAttribute('data-ad-client', CONFIG.AD_CLIENT);
+            document.body.appendChild(probe);
+
+            setTimeout(() => {
+                const adsDefined = typeof window.adsbygoogle !== 'undefined';
+                const blocked = !adsDefined ||
+                    probe.offsetHeight === 0 ||
+                    window.getComputedStyle(probe).display === 'none' ||
+                    !probe.innerHTML.length;
+                if (document.body.contains(probe)) {
+                    document.body.removeChild(probe);
+                }
+
+                if (blocked) {
+                    const notice = document.createElement('div');
+                    notice.className   = 'adblock-notice';
+                    notice.innerHTML   = `
+                        <i class="fas fa-heart" aria-hidden="true"></i>
+                        <p><strong>Ei, que tal desativar o adblock?</strong>
+                           Os anúncios mantêm as ofertas gratuitas para você.</p>
+                        <button class="adblock-notice__close" aria-label="Fechar aviso">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                        </button>`;
+                    notice.querySelector('.adblock-notice__close')
+                        .addEventListener('click', () => notice.remove());
+                    document.getElementById('mainHeader').insertAdjacentElement('afterend', notice);
+                }
+            }, 1500);
+        }
+
+        function watchAnchorAdHeight(insEl) {
+            if (!insEl) return;
+            const checkHeight = () => {
+                if (insEl.offsetHeight > 0) {
+                    document.body.classList.add('has-anchor-ad');
+                }
+            };
+            checkHeight();
+            const mo = new MutationObserver(checkHeight);
+            mo.observe(insEl, { attributes: true, childList: true, subtree: true });
+        }
+
+        function initAdSlot(slotEl, adClient, adSlot) {
+            if (!slotEl || slotEl.dataset.adInit) return;
+
+            if (!adSlot) {
+                slotEl.dataset.adInit = 'empty';
+                return;
+            }
+
+            slotEl.dataset.adInit = '1';
+
+            const isAnchor = slotEl.dataset.adPosition === 'anchor-mobile';
+
+            const activate = () => {
+                const ins = document.createElement('ins');
+                ins.className                    = 'adsbygoogle';
+                ins.style.display                = 'block';
+                ins.setAttribute('data-ad-client', adClient);
+                ins.setAttribute('data-ad-slot',   adSlot);
+
+                if (isAnchor) {
+                    ins.setAttribute('data-ad-format',       'anchor');
+                    ins.setAttribute('data-full-width-responsive', 'true');
+                } else {
+                    ins.setAttribute('data-ad-format',       'auto');
+                    ins.setAttribute('data-full-width-responsive', 'true');
+                }
+
+                slotEl.appendChild(ins);
+                try {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (_) {}
+
+                if (isAnchor) watchAnchorAdHeight(ins);
+            };
+
+            if ('IntersectionObserver' in window && !isAnchor) {
+                const obs = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            observer.unobserve(entry.target);
+                            activate();
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                obs.observe(slotEl);
+            } else {
+                activate();
+            }
+        }
+
+        function activateAdSlotsIn(container) {
+            container.querySelectorAll('.ad-slot[data-ad-position]').forEach(slot => {
+                const position = slot.dataset.adPosition;
+
+                const slotKeyMap = {
+                    'atf':              'atf',
+                    'desktop-sticky':   'desktopSticky',
+                    'feed-1':           'feed1',
+                    'feed-2':           'feed2',
+                    'feed-3':           'feed3',
+                    'feed-inline-1':    'feedInline1',
+                    'feed-inline-2':    'feedInline2',
+                    'feed-inline-3':    'feedInline3',
+                    'product-bottom':   'productBottom',
+                    'article-top':      'articleTop',
+                    'article-0':        'articleInline1',
+                    'article-1':        'articleInline2',
+                    'article-2':        'articleInline3',
+                    'article-bottom':   'articleBottom',
+                    'article-bottom-2': 'articleBottom2',
+                    'anchor-mobile':    'anchorMobile'
+                };
+
+                const key = slotKeyMap[position] || null;
+                const adSlotId = key ? (CONFIG.AD_SLOTS[key] || '') : '';
+                initAdSlot(slot, CONFIG.AD_CLIENT, adSlotId);
+            });
+        }
+
+        function injectAdSlots(html, interval = CONFIG.AD_INJECT_INTERVAL) {
+            if (!html || html.trim().length < 150) return html || '';
+
+            const wrap      = document.createElement('div');
+            wrap.innerHTML  = html;
+            const paragraphs = Array.from(wrap.querySelectorAll('p'));
+            const total      = paragraphs.length;
+
+            paragraphs.forEach((p, i) => {
+                if ((i + 1) % interval === 0 && i < total - 1) {
+                    if (p.textContent.length <= 80) return;
+                    const slotIndex = Math.min(Math.floor(i / interval), 2);
+                    const slot = document.createElement('div');
+                    slot.className          = 'ad-slot ad-slot--article';
+                    slot.setAttribute('aria-hidden', 'true');
+                    slot.dataset.adPosition = `article-${slotIndex}`;
+                    p.insertAdjacentElement('afterend', slot);
+                }
+            });
+
+            return wrap.innerHTML;
+        }
+
+        async function sanitize(html) {
+            const purify = await window.domPurifyReady;
+            if (purify) {
+                return purify.sanitize(html, {
+                    ALLOWED_TAGS: ['p','h2','h3','h4','ul','ol','li','strong','em',
+                                   'a','img','blockquote','br','span','div'],
+                    ALLOWED_ATTR: ['href','src','alt','target','rel','class','aria-hidden']
+                });
+            }
+            /* Fallback: sanitização básica quando DOMPurify indisponível */
+            return html
+                .replace(/<script[\s\S]*?<\/script>/gi, '')
+                .replace(/\bon\w+\s*=\s*["'][^"']*["']/gi, '')
+                .replace(/javascript\s*:/gi, '');
+        }
+
+        function calcHeroScore(p) {
+            if (p.expira_em && p.expira_em < Date.now()) return 0;
+
+            const { desc, pFinal } = calcPrice(p);
+            const price        = normalizeNum(pFinal);
+            const discountBonus = desc > 0 ? (desc * price) : 0;
+            const rawScore     = price * 0.25 + discountBonus * 0.55 + Math.min(p.clicks || 0, 200) * 0.20;
+            const diasDesdePublicacao = p.timestamp
+                ? (Date.now() - p.timestamp) / 86400000
+                : 0;
+            /* [F2] decay 60 dias — menos agressivo para produtos com alto desconto */
+            const decay = Math.exp(-diasDesdePublicacao / 60);
+            return rawScore * decay;
+        }
+
+        function calcDealScoreDisplay(p) {
+            const produtos = allPosts.filter(q => getTipo(q) === 'produto');
+            if (produtos.length === 0) return 0;
+            let maxScore = 0;
+            produtos.forEach(q => {
+                const s = calcHeroScore(q);
+                if (s > maxScore) maxScore = s;
+            });
+            if (maxScore === 0) return 0;
+            return Math.min(100, Math.round((calcHeroScore(p) / maxScore) * 100));
+        }
+
+        let lastHeroExpiraEm = null;
+        let lastHeroId       = null;
+
+        function buildDynamicHero() {
+            const produtos = allPosts.filter(p => getTipo(p) === 'produto');
+            if (produtos.length === 0) return buildStaticHero();
+
+            const pinned = produtos.find(p => p.pinned);
+            let hero;
+            if (pinned) {
+                hero = pinned;
+            } else {
+                hero      = produtos[0];
+                let bestScore = calcHeroScore(hero);
+                for (let i = 1; i < produtos.length; i++) {
+                    const s = calcHeroScore(produtos[i]);
+                    if (s > bestScore) { bestScore = s; hero = produtos[i]; }
+                }
+            }
+
+            lastHeroExpiraEm = hero.expira_em || null;
+            lastHeroId       = hero.id;
+
+            return buildHeroHtml(hero);
+        }
+
+        function buildHeroHtml(hero) {
+            const { pFinal, pAntigo, desc } = calcPrice(hero);
+            const savings  = calcSavings(hero);
+            const extLink  = normalizeAffiliateLink(hero.link, hero.id);
+            const intLink  = getSiteUrl(hero);
+
+            injectFomoBar(hero, extLink);
+
+            const heroCTAText = desc > 0
+                ? `<i class="fas fa-shopping-bag" aria-hidden="true"></i> Comprar agora — ${Math.round(desc)}% OFF`
+                : `<i class="fas fa-arrow-right" aria-hidden="true"></i> Ver por R$ ${pFinal}`;
+
+            const heroCTAMicrocopy = desc === 0
+                ? `<small class="hero-cta__microcopy">Clique e confira disponibilidade</small>`
+                : '';
+
+            const innerClass = hero.imagem ? 'hero-dynamic-inner container' : 'hero-dynamic-inner hero-dynamic-inner--full container';
+
+            const heroImgUrl = hero.imagem ? optimizeImageUrl(hero.imagem) : '';
+
+            return `
+            <div class="hero-banner hero-banner--dynamic">
+                <div class="${innerClass}">
+                    <div class="hero-dynamic__content">
+                        ${desc > 0 ? `<div class="hero-dynamic__badge">
+                            <i class="fas fa-fire" aria-hidden="true"></i>
+                            OFERTA IMPERDÍVEL — ${Math.round(desc)}% OFF
+                        </div>` : ''}
+                        <div class="hero-dynamic__cat">${(hero.categoria || 'PRODUTO').toUpperCase()}</div>
+                        <h1 class="hero-dynamic__title">${hero.titulo}</h1>
+                        <div>
+                            ${pAntigo > 0 ? `<div class="hero-dynamic__price-old">De R$ ${hero.preco_antigo}</div>` : ''}
+                            <div class="hero-dynamic__price">
+                                <small>R$</small>${pFinal}
+                            </div>
+                            ${savings ? `<div class="hero-dynamic__savings">
+                                <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                Economize R$ ${savings}
+                            </div>` : ''}
+                        </div>
+                        <div class="hero-countdown" id="heroCountdown" aria-live="polite" aria-atomic="true">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            Oferta expira em <span class="hero-countdown__time" id="heroCountdownTime">15:00</span>
+                        </div>
+                        <div class="hero-cta">
+                            <div class="hero-cta__wrap">
+                                <a href="${extLink}"
+                                   class="hero-cta__buy"
+                                   id="heroCTABuy"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   onclick="trackAffiliate('${hero.id}','${(hero.titulo||'').replace(/'/g,"\\'")}','hero')">
+                                    ${heroCTAText}
+                                </a>
+                                ${heroCTAMicrocopy}
+                            </div>
+                            <a href="${intLink}" class="hero-cta__details">
+                                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                                Ver Detalhes
+                            </a>
+                        </div>
+                    </div>
+                    ${hero.imagem ? `
+                    <div class="hero-dynamic__img-wrap" aria-hidden="true">
+                        <img src="${heroImgUrl}"
+                             class="hero-dynamic__img"
+                             loading="eager"
+                             fetchpriority="high"
+                             decoding="async"
+                             alt="${hero.titulo}"
+                             width="380"
+                             height="320"
+                             style="aspect-ratio:380/320;object-fit:contain;">
+                    </div>` : ''}
+                </div>
+            </div>`;
+        }
+
+        function buildStaticHero() {
+            return `
+            <div class="hero-banner">
+                <div class="container">
+                    <h1>Tauiker <span>Store</span></h1>
+                    <p>Qualidade em cada achadinho.</p>
+                </div>
+            </div>`;
+        }
+
+        let countdownInterval = null;
+        let viewGeneration = 0;
+
+        /* [C6] heroId param — countdown key por produto; [N6/M4] rotação pós-expiração */
+        function startHeroCountdown(heroId, expiraEm) {
+            clearInterval(countdownInterval);
+
+            const KEY      = `ts_hero_cd_${heroId || 'global'}`;
+            const DURATION = CONFIG.HERO_COUNTDOWN_DURATION_S;
+            const TTL_MS   = DURATION * 1000;
+
+            const wrap = document.getElementById('heroCountdown');
+            const el   = document.getElementById('heroCountdownTime');
+            if (!el || !wrap) return;
+
+            if (expiraEm && expiraEm > Date.now()) {
+                const tick = () => {
+                    const elT  = document.getElementById('heroCountdownTime');
+                    const wrapT = document.getElementById('heroCountdown');
+                    if (!elT || !wrapT) { clearInterval(countdownInterval); countdownInterval = null; return; }
+
+                    const remaining = Math.max(0, Math.floor((expiraEm - Date.now()) / 1000));
+                    const totalHours = Math.floor(remaining / 3600);
+                    if (totalHours >= 24) {
+                        const days = Math.floor(totalHours / 24);
+                        elT.textContent = `${days}d ${totalHours % 24}h`;
+                    } else {
+                        const m = Math.floor(remaining / 60);
+                        const s = remaining % 60;
+                        elT.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                    }
+
+                    wrapT.classList.toggle('hero-countdown--urgent', remaining > 0 && remaining <= 300);
+
+                    if (remaining === 0) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                        wrapT.classList.remove('hero-countdown--urgent');
+                        wrapT.classList.add('hero-countdown--expired');
+                        elT.textContent = '—:—';
+                        wrapT.setAttribute('aria-label', 'Oferta encerrada');
+                        const ctaBtn = document.getElementById('heroCTABuy');
+                        if (ctaBtn) {
+                            ctaBtn.innerHTML = '<i class="fas fa-eye" aria-hidden="true"></i> Verificar Preço Atual';
+                            ctaBtn.classList.add('hero-cta__buy--expired');
+                        }
+                    }
+                };
+                tick();
+                countdownInterval = setInterval(tick, 1000);
+                return;
+            }
+
+            let savedStart;
+            try {
+                savedStart = parseInt(localStorage.getItem(KEY) || '0', 10);
+            } catch (_) {
+                savedStart = 0;
+            }
+
+            if (!savedStart || (Date.now() - savedStart) >= TTL_MS) {
+                savedStart = Date.now();
+                try { localStorage.setItem(KEY, String(savedStart)); } catch (_) {}
+            }
+
+            const tick = () => {
+                const elT   = document.getElementById('heroCountdownTime');
+                const wrapT = document.getElementById('heroCountdown');
+                if (!elT || !wrapT) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                    return;
+                }
+
+                const elapsed   = Math.floor((Date.now() - savedStart) / 1000);
+                const remaining = Math.max(0, DURATION - elapsed);
+                const m = Math.floor(remaining / 60);
+                const s = remaining % 60;
+                elT.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+
+                wrapT.classList.toggle('hero-countdown--urgent', remaining > 0 && remaining <= 300);
+
+                if (remaining === 0) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                    try { localStorage.removeItem(KEY); } catch (_) {}
+
+                    /* [N6/M4] Rotação pós-expiração — próximo produto com maior score */
+                    const nextProds = allPosts
+                        .filter(p => getTipo(p) === 'produto' && p.id !== heroId && !(p.expira_em && p.expira_em < Date.now()))
+                        .sort((a, b) => calcHeroScore(b) - calcHeroScore(a));
+
+                    if (nextProds.length > 0) {
+                        const next = nextProds[0];
+                        const heroBannerEl = document.querySelector('.hero-banner--dynamic');
+                        if (heroBannerEl) {
+                            heroBannerEl.style.transition = 'opacity 0.4s ease';
+                            heroBannerEl.style.opacity = '0';
+                            setTimeout(() => {
+                                lastHeroId       = next.id;
+                                lastHeroExpiraEm = next.expira_em || null;
+                                const tmp = document.createElement('div');
+                                tmp.innerHTML = buildHeroHtml(next);
+                                const newEl = tmp.firstElementChild;
+                                if (newEl && heroBannerEl.parentNode) {
+                                    newEl.style.opacity = '0';
+                                    newEl.style.transition = 'opacity 0.4s ease';
+                                    heroBannerEl.parentNode.replaceChild(newEl, heroBannerEl);
+                                    requestAnimationFrame(() => { newEl.style.opacity = '1'; });
+                                    startHeroCountdown(next.id, lastHeroExpiraEm);
+                                }
+                            }, 420);
+                            return;
+                        }
+                    }
+
+                    /* fallback: mostrar UI de expirado */
+                    wrapT.classList.remove('hero-countdown--urgent');
+                    wrapT.classList.add('hero-countdown--expired');
+                    elT.textContent = '—:—';
+                    wrapT.setAttribute('aria-label', 'Oferta encerrada');
+                    const ctaBtn = document.getElementById('heroCTABuy');
+                    if (ctaBtn) {
+                        ctaBtn.innerHTML = '<i class="fas fa-eye" aria-hidden="true"></i> Verificar Preço Atual';
+                        ctaBtn.classList.add('hero-cta__buy--expired');
+                    }
+                }
+            };
+
+            tick();
+            countdownInterval = setInterval(tick, 1000);
+        }
+
+        function injectFomoBar(hero, extLink) {
+            const bar = document.getElementById('fomoBar');
+            if (!bar) return;
+            const { pFinal, desc } = calcPrice(hero);
+
+            const subtext = `${desc > 0 ? '💥 ' + Math.round(desc) + '% OFF · ' : ''}R$ ${pFinal} · Clique antes de acabar`;
+            bar.innerHTML = `
+                <div class="fomo-bar__text">
+                    <strong>${(hero.titulo || '').substring(0, 32)}${(hero.titulo || '').length > 32 ? '…' : ''}</strong>
+                    <span>${subtext}</span>
+                </div>
+                <a href="${extLink}"
+                   class="fomo-bar__btn"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   onclick="trackAffiliate('${hero.id}','${(hero.titulo||'').replace(/'/g,"\\'")}','fomo_bar')">
+                    <i class="fas fa-shopping-bag" aria-hidden="true"></i> Ver
+                </a>
+                <button class="fomo-bar__close" aria-label="Fechar barra de oferta">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>`;
+
+            bar.style.display = 'flex';
+            requestAnimationFrame(() => { bar.classList.add('visible'); });
+            bar.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('has-fomo-bar');
+
+            bar.querySelector('.fomo-bar__close')
+                .addEventListener('click', () => {
+                    bar.classList.remove('visible');
+                    setTimeout(() => { bar.style.display = 'none'; }, 420);
+                    document.body.classList.remove('has-fomo-bar');
+                });
+        }
+
+        let fomoTimer = null;
+
+        /* [C5] excludeId — filtra produto atual do pool de fomo */
+        function startFomoEngine(excludeId) {
+            if (fomoTimer) clearTimeout(fomoTimer);
+
+            const fire = () => {
+                const produtos = allPosts.filter(p =>
+                    getTipo(p) === 'produto' && (!excludeId || p.id !== excludeId)
+                );
+                if (produtos.length === 0) return;
+
+                const priority = produtos.filter(p => p.imagem && calcPrice(p).desc > 15);
+                const pool = priority.length > 0 ? priority : produtos;
+
+                const p    = pool[Math.floor(Math.random() * pool.length)];
+
+                const fomoBarEl = document.getElementById('fomoBar');
+                if (fomoBarEl && fomoBarEl.classList.contains('visible')) {
+                    fomoTimer = setTimeout(fire, CONFIG.FOMO_INTERVAL_MS);
+                    return;
+                }
+
+                /* Usar injectFomoBar para qualquer produto do pool — barra fixa superior a toast */
+                const extLink = p.link ? normalizeAffiliateLink(p.link, p.id) : '#';
+                injectFomoBar(p, extLink);
+
+                fomoTimer = setTimeout(fire, CONFIG.FOMO_INTERVAL_MS);
+            };
+
+            fomoTimer = setTimeout(fire, CONFIG.FOMO_DELAY_MS);
+        }
+
+        let progressActive = false;
+
+        function startReadingProgress() {
+            progressActive = true;
+            const bar = document.getElementById('readingProgress');
+            if (!bar) return;
+            bar.style.width = '0%';
+            bar.style.display = 'block';
+        }
+
+        function stopReadingProgress() {
+            progressActive = false;
+            const bar = document.getElementById('readingProgress');
+            if (bar) bar.style.display = 'none';
+        }
+
+        function updateReadingProgress() {
+            if (!progressActive) return;
+            const bar     = document.getElementById('readingProgress');
+            const docH    = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+            if (bar) bar.style.width = Math.min(scrolled, 100).toFixed(1) + '%';
+        }
+
+        /* [F4] Notificar AdSense em SPA — resetar slots externos antes de activateAdSlotsIn */
+        function notifyAdNetworks() {
+            try { if (typeof window.mnPageView === 'function') window.mnPageView(); } catch(_) {}
+            try { if (window._mNHandle?.queue) window._mNHandle.queue.push({ cmd: 'pageview' }); } catch(_) {}
+            try { if (typeof window.__mnet?.reload === 'function') window.__mnet.reload(); } catch(_) {}
+            try { window.dispatchEvent(new CustomEvent('monetag:pageview')); } catch(_) {}
+
+            /* Reinicializar slots externos (desktopSticky e anchorMobile) a cada navegação SPA */
+            try {
+                const stickyContainer = document.getElementById('adStickyDesktop');
+                if (stickyContainer) {
+                    stickyContainer.querySelectorAll('.ad-slot[data-ad-init]').forEach(s => {
+                        delete s.dataset.adInit;
+                    });
+                    activateAdSlotsIn(stickyContainer);
+                }
+            } catch(_) {}
+            try {
+                const anchorContainer = document.getElementById('anchorAdContainer');
+                if (anchorContainer && window.innerWidth <= 768) {
+                    anchorContainer.querySelectorAll('.ad-slot[data-ad-init]').forEach(s => {
+                        delete s.dataset.adInit;
+                    });
+                    activateAdSlotsIn(anchorContainer);
+                }
+            } catch(_) {}
+        }
+
+        function setView(html, afterRender) {
+            const appEl   = document.getElementById('app');
+            let swapDone  = false;
+            const myGen   = ++viewGeneration;
+
+            if (fomoTimer) { clearTimeout(fomoTimer); fomoTimer = null; }
+
+            const prevSticky = document.getElementById('stickyCta');
+            if (prevSticky) {
+                prevSticky.remove();
+                document.body.classList.remove('has-sticky-cta');
+            }
+
+            const swap = () => {
+                if (swapDone) return;
+                if (myGen !== viewGeneration) return;
+                swapDone = true;
+
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+
+                const schemaEl = document.getElementById('schema-product');
+                if (schemaEl) schemaEl.remove();
+
+                appEl.innerHTML = html;
+
+                /* [M2] Limpar data-ad-init dos slots recém-criados antes de activateAdSlotsIn */
+                appEl.querySelectorAll('.ad-slot[data-ad-init]').forEach(slot => {
+                    delete slot.dataset.adInit;
+                });
+
+                appEl.classList.remove('view-exit');
+                document.documentElement.style.scrollBehavior = 'auto';
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                document.documentElement.style.scrollBehavior = '';
+                activateAdSlotsIn(appEl);
+                stopReadingProgress();
+
+                notifyAdNetworks();
+
+                if (typeof afterRender === 'function') afterRender();
+            };
+
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reducedMotion) {
+                swap();
+                return;
+            }
+
+            appEl.classList.add('view-exit');
+            appEl.addEventListener('transitionend', swap, { once: true });
+            setTimeout(swap, 300);
+        }
+
+        let fbUnsubscribe    = null;
+        let dataInitialized  = false;
+        let knownPostIds     = new Set();
+
+        let navigatedInternally = false;
+        window.navigatedInternally = false;
+
+        function startFirebaseListener() {
+            if (fbUnsubscribe) fbUnsubscribe();
+            dataInitialized = false;
+            knownPostIds.clear();
+
+            const postsQuery = query(
+                ref(db, 'posts/'),
+                orderByChild('timestamp'),
+                limitToLast(CONFIG.POSTS_LIMIT)
+            );
+
+            fbUnsubscribe = onValue(postsQuery, (snapshot) => {
+                const data = snapshot.val();
+                postMap.clear();
+
+                if (data) {
+                    const now = Date.now();
+                    Object.entries(data).forEach(([id, val]) => {
+                        /* Filtrar posts agendados com publish_at no futuro */
+                        if (val.publish_at && val.publish_at > now) return;
+                        postMap.set(id, { ...val, id });
+                    });
+                    allPosts = [...postMap.values()].sort((a, b) => {
+                        const ta = a.timestamp || 0;
+                        const tb = b.timestamp || 0;
+                        return tb - ta;
+                    });
+                } else {
+                    allPosts = [];
+                }
+
+                if (!dataInitialized) {
+                    dataInitialized = true;
+                    postMap.forEach((_, id) => knownPostIds.add(id));
+                    route(window.location.hash || '#/');
+                } else {
+                    const newIds = [];
+                    postMap.forEach((_, id) => {
+                        if (!knownPostIds.has(id)) {
+                            newIds.push(id);
+                            knownPostIds.add(id);
+                        }
+                    });
+
+                    if (newIds.length > 0) {
+                        const label = newIds.length === 1
+                            ? '✨ 1 novo produto chegou'
+                            : `✨ ${newIds.length} novos produtos chegaram`;
+                        showToast(`${label} — toque para atualizar`, 'update', () => {
+                            route(window.location.hash || '#/');
+                        });
+                    }
+                }
+            });
+        }
+
+        startFirebaseListener();
+
+        ('requestIdleCallback' in window
+            ? cb => requestIdleCallback(cb, { timeout: 2000 })
+            : cb => setTimeout(cb, 500))(detectAdBlock);
+
+        const stickyDesktopContainer = document.getElementById('adStickyDesktop');
+        if (stickyDesktopContainer) {
+            activateAdSlotsIn(stickyDesktopContainer);
+        }
+
+        const anchorContainer = document.getElementById('anchorAdContainer');
+        if (anchorContainer && window.innerWidth <= 768) {
+            activateAdSlotsIn(anchorContainer);
+        }
+
+        /* [C3] Global setInterval — live-update all card expiry countdowns every 30s */
+        setInterval(() => {
+            document.querySelectorAll('.expiry-countdown[data-expira]').forEach(el => {
+                const expiraEm = parseInt(el.dataset.expira, 10);
+                if (!expiraEm) return;
+                const now = Date.now();
+                const remaining = expiraEm - now;
+                if (remaining <= 0) {
+                    el.style.display = 'none';
+                    return;
+                }
+                const totalHours = Math.floor(remaining / 3600000);
+                const mins = Math.floor((remaining % 3600000) / 60000);
+                let label;
+                if (totalHours >= 24) {
+                    const days = Math.floor(totalHours / 24);
+                    label = `${days}d ${totalHours % 24}h`;
+                } else if (totalHours >= 1) {
+                    label = `${totalHours}h ${mins}min`;
+                } else {
+                    label = `${mins}min`;
+                }
+                el.classList.toggle('expiry-countdown--urgent', remaining < 3600000);
+                const timeEl = el.querySelector('.expiry-countdown__time');
+                if (timeEl) timeEl.textContent = label;
+            });
+        }, 30000);
+
+        function parseRoute(hash) {
+            const path  = (hash || '#/').replace('#', '') || '/';
+            const parts = path.split('/').filter(Boolean);
+            const rawId = parts[1] || null;
+            const id    = rawId ? rawId.split('?')[0] : null;
+            return { view: parts[0] || 'home', id };
+        }
+
+        function updateActiveNav(hash) {
+            const current = hash || '#/';
+
+            document.querySelectorAll('#navDesktopLinks a[data-nav-href]').forEach(a => {
+                a.classList.toggle('active', a.dataset.navHref === current);
+            });
+
+            document.querySelectorAll('#navDrawerLinks a[data-nav-href]').forEach(a => {
+                a.classList.toggle('active', a.dataset.navHref === current);
+            });
+        }
+
+        function route(hash) {
+            const { view, id } = parseRoute(hash);
+
+            navigatedInternally = true;
+            window.navigatedInternally = true;
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_path:  hash || '/',
+                    page_title: document.title
+                });
+            }
+
+            updateActiveNav(hash);
+
+            switch (view) {
+                case 'produto':
+                case 'blog':
+                case 'review':    return id ? renderSingle(id) : renderHome();
+                case 'news':      return id ? renderSingle(id) : renderNews();
+                case 'categoria': return renderCategoria(id || 'todos');
+                case 'wishlist':  return renderWishlist();
+                case 'politica':  return renderStatic('politica');
+                case 'termos':    return renderStatic('termos');
+                case 'contato':   return renderStatic('contato');
+                default:          return renderHome();
+            }
+        }
+
+        let lastNonSearchHash = '#/';
+
+        window.addEventListener('hashchange', () => {
+            lastNonSearchHash = window.location.hash || '#/';
+            if (!dataInitialized) return;
+            route(window.location.hash);
+        });
+
+        function getRecentlyViewed() {
+            try {
+                const raw = localStorage.getItem(CONFIG.RECENTLY_VIEWED_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (_) { return []; }
+        }
+
+        function addToRecentlyViewed(id) {
+            try {
+                let ids = getRecentlyViewed().filter(i => i !== id);
+                ids.unshift(id);
+                ids = ids.slice(0, CONFIG.RECENTLY_VIEWED_LIMIT);
+                localStorage.setItem(CONFIG.RECENTLY_VIEWED_KEY, JSON.stringify(ids));
+            } catch (_) {}
+        }
+
+        function getWishlist() {
+            try {
+                const raw = localStorage.getItem(CONFIG.WISHLIST_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (_) { return []; }
+        }
+
+        function updateWishlistBadge() {
+            try {
+                const count = getWishlist().length;
+                const badge = document.getElementById('wishlistBadge');
+                if (badge) {
+                    badge.textContent = count > 0 ? count : '';
+                    badge.style.display = count > 0 ? 'flex' : 'none';
+                }
+            } catch (_) {}
+        }
+
+        window.toggleWishlist = function(id, btn) {
+            try {
+                let ids = getWishlist();
+                if (ids.includes(id)) {
+                    ids = ids.filter(i => i !== id);
+                    if (btn) { btn.innerHTML = '<i class="far fa-heart"></i>'; btn.title = 'Salvar para depois'; }
+                    showToast('Removido da lista de desejos', '');
+                } else {
+                    ids.unshift(id);
+                    if (btn) { btn.innerHTML = '<i class="fas fa-heart" style="color:#ef4444"></i>'; btn.title = 'Na lista de desejos'; }
+                    showToast('✅ Salvo para depois!', 'success');
+                }
+                localStorage.setItem(CONFIG.WISHLIST_KEY, JSON.stringify(ids));
+                updateWishlistBadge();
+            } catch (_) {}
+        };
+
+        window.closeShareModal = function() {
+            const modal = document.getElementById('shareModal');
+            if (modal) {
+                modal.classList.remove('visible');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+        };
+
+        window.nativeShare = async function(title, textRaw) {
+            const text = decodeURIComponent(textRaw);
+            const urlMatch = text.match(/https?:\/\/[^\s]+/);
+            const shareUrl = urlMatch ? urlMatch[0] : window.location.href;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (isMobile) {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: title,
+                            text: text,
+                            url: shareUrl
+                        });
+                    } catch (err) {
+                        if (err.name !== 'AbortError') fallbackCopy(text);
+                    }
+                } else {
+                    fallbackCopy(text);
+                }
+            } else {
+                /* Desktop: abrir modal com múltiplas opções de compartilhamento */
+                const modal = document.getElementById('shareModal');
+                if (modal) {
+                    const waEl = modal.querySelector('.share-modal__wa');
+                    const tgEl = modal.querySelector('.share-modal__tg');
+                    const copyLinkEl = modal.querySelector('.share-modal__copy-link');
+                    const copyTextEl = modal.querySelector('.share-modal__copy-text');
+
+                    if (waEl) waEl.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+                    if (tgEl) tgEl.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`;
+
+                    if (copyLinkEl) {
+                        copyLinkEl.onclick = () => {
+                            navigator.clipboard.writeText(shareUrl)
+                                .then(() => showToast('Link copiado!', 'success'))
+                                .catch(() => showToast('Erro ao copiar.', 'error'));
+                            window.closeShareModal();
+                        };
+                    }
+
+                    if (copyTextEl) {
+                        copyTextEl.onclick = () => {
+                            navigator.clipboard.writeText(text)
+                                .then(() => showToast('Texto copiado!', 'success'))
+                                .catch(() => showToast('Erro ao copiar.', 'error'));
+                            window.closeShareModal();
+                        };
+                    }
+
+                    modal.classList.add('visible');
+                    modal.setAttribute('aria-hidden', 'false');
+                }
+            }
+
+            async function fallbackCopy(textoParaCopiar) {
+                try {
+                    await navigator.clipboard.writeText(textoParaCopiar);
+                    showToast('Link copiado com sucesso!', 'success');
+                } catch (err) {
+                    showToast('Erro ao copiar.', 'error');
+                }
+            }
+        };
+
+        function buildRecentlyViewed() {
+            const ids = getRecentlyViewed();
+            if (ids.length === 0) return '';
+
+            const posts = ids
+                .map(id => postMap.get(id))
+                .filter(Boolean);
+
+            if (posts.length === 0) return '';
+
+            const TYPE_ICONS = {
+                produto: 'fa-tag',
+                review:  'fa-star-half-alt',
+                blog:    'fa-newspaper',
+                news:    'fa-bolt'
+            };
+
+            const cards = posts.map(p => {
+                const tipo    = getTipo(p);
+                const { pFinal } = calcPrice(p);
+                const isProd  = tipo === 'produto';
+                const icon    = TYPE_ICONS[tipo] || 'fa-file';
+                const imgUrl  = p.imagem ? optimizeImageUrl(p.imagem) : '';
+                return `
+                <a href="#/${tipo}/${p.id}" class="recently-viewed__card"
+                   aria-label="Ver novamente: ${p.titulo}">
+                    <div class="recently-viewed__card__img">
+                        ${p.imagem
+                            ? `<img src="${imgUrl}" loading="lazy" decoding="async"
+                                    alt="${p.titulo}"
+                                    style="width:100%;height:100%;object-fit:contain;aspect-ratio:1/1;">`
+                            : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--gray-xlight);aspect-ratio:1/1;">
+                                <i class="fas ${icon}" style="color:var(--gray)"></i></div>`}
+                    </div>
+                    <span class="recently-viewed__card__title">${p.titulo}</span>
+                    ${isProd
+                        ? `<span class="recently-viewed__card__price">R$ ${pFinal}</span>`
+                        : `<span style="font-size:0.58rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:0.04em"><i class="fas ${icon}" style="font-size:0.55rem"></i> ${tipo}</span>`
+                    }
+                </a>`;
+            }).join('');
+
+            return `
+            <div class="recently-viewed" aria-label="Vistos recentemente">
+                <div class="recently-viewed__header">
+                    <i class="fas fa-history" aria-hidden="true"></i>
+                    Vistos Recentemente
+                </div>
+                <div class="recently-viewed__strip">${cards}</div>
+            </div>`;
+        }
+
+        function buildPriceBox(p) {
+            const { pFinal, pAntigo, desc } = calcPrice(p);
+            const savings = calcSavings(p);
+
+            if (pFinal === '0,00') {
+                return `
+                <div class="price-box">
+                    <span class="price-unavailable">Ver preço na loja</span>
+                </div>`;
+            }
+
+            return `
+            <div class="price-box">
+                ${pAntigo > 0 ? `
+                <div class="old-price">
+                    <span>R$ ${p.preco_antigo}</span>
+                    <span class="disc-badge">-${Math.round(desc)}%</span>
+                </div>` : ''}
+                <div class="current-price">R$ ${pFinal}</div>
+                ${savings ? `<div class="savings-label"><i class="fas fa-check-circle" aria-hidden="true"></i> Economize R$ ${savings}</div>` : ''}
+            </div>`;
+        }
+
+        function buildDiscountBadge(p) {
+            const { desc } = calcPrice(p);
+            if (!desc || desc <= 0) return '';
+            const rounded    = Math.round(desc);
+            const pulseClass = desc >= 20 ? ' badge-discount--pulse' : '';
+            const savings    = calcSavings(p);
+            return `
+            <div class="badge-discount${pulseClass}" aria-label="Desconto de ${rounded}%">
+                <span>${rounded}% OFF</span>
+                ${savings ? `<span class="badge-discount__saving">-R$ ${savings}</span>` : ''}
+            </div>`;
+        }
+
+        function buildScarcityBadge(p) {
+            if (getTipo(p) !== 'produto') return '';
+            const { desc } = calcPrice(p);
+            if (!desc || desc < CONFIG.SCARCITY_MIN_DISCOUNT) return '';
+
+            const bucketSize  = 10 * 60 * 1000;
+            const timeBucket  = Math.floor(Date.now() / bucketSize);
+            const idHash      = (p.id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+
+            let sessionSalt;
+            try {
+                sessionSalt = parseInt(sessionStorage.getItem('ts_salt') || '0', 10)
+                    || (() => {
+                        const s = Math.floor(Math.random() * CONFIG.SCARCITY_MESSAGES.length);
+                        try { sessionStorage.setItem('ts_salt', String(s)); } catch(_) {}
+                        return s;
+                    })();
+            } catch(_) {
+                sessionSalt = Math.floor(Math.random() * CONFIG.SCARCITY_MESSAGES.length);
+            }
+
+            const msgIndex    = (idHash + timeBucket + sessionSalt + viewGeneration) % CONFIG.SCARCITY_MESSAGES.length;
+            const msg         = CONFIG.SCARCITY_MESSAGES[msgIndex];
+            const animClass   = desc >= 15 ? ' badge-scarcity--animated' : '';
+
+            return `<div class="badge-scarcity${animClass}" aria-label="${msg}">
+                <i class="fas fa-fire" aria-hidden="true"></i>${msg}
+            </div>`;
+        }
+
+        /* [F3] Social proof — fallback para produtos novos sem cliques */
+        function buildSocialProof(p) {
+            const clicks = p.clicks || 0;
+
+            if (clicks === 0) {
+                return `<div class="social-proof-badge social-proof-badge--new" aria-label="Produto novo">
+                    🆕 Novidade — Seja um dos primeiros
+                </div>`;
+            }
+
+            if (clicks < 3) {
+                return `<div class="social-proof-badge" aria-label="Poucas pessoas conferiram esta oferta">
+                    <i class="fas fa-users" aria-hidden="true"></i> Poucas pessoas já conferiram
+                </div>`;
+            }
+
+            let text, icon;
+            if (clicks >= 10) {
+                const count = clicks >= 1000
+                    ? (clicks / 1000).toFixed(1) + 'k'
+                    : clicks;
+                text = `${count} já conferiram esta oferta`;
+                icon = 'fa-users';
+            } else {
+                text = 'Poucos conferiram esta oferta';
+                icon = 'fa-users';
+            }
+
+            return `<div class="social-proof-badge" aria-label="${clicks} pessoas conferiram esta oferta">
+                <i class="fas ${icon}" aria-hidden="true"></i> ${text}
+            </div>`;
+        }
+
+        function buildExpiryCountdown(p) {
+            if (!p.expira_em) return '';
+            const now = Date.now();
+            const remaining = p.expira_em - now;
+            if (remaining <= 0) return '';
+
+            const totalHours = Math.floor(remaining / 3600000);
+            const mins       = Math.floor((remaining % 3600000) / 60000);
+
+            let label, tooltip = '';
+            if (totalHours >= 24) {
+                const days = Math.floor(totalHours / 24);
+                label = `${days}d ${totalHours % 24}h`;
+                const expDate = new Date(p.expira_em);
+                const weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+                const months   = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+                tooltip = `Expira em ${days}d ${totalHours % 24}h (${weekdays[expDate.getDay()]}, ${expDate.getDate()} ${months[expDate.getMonth()]})`;
+            } else if (totalHours >= 1) {
+                label = `${totalHours}h ${mins}min`;
+            } else {
+                label = `${mins}min`;
+            }
+
+            const urgentClass = remaining < 3600000 ? ' expiry-countdown--urgent' : '';
+            return `<div class="expiry-countdown${urgentClass}" data-expira="${p.expira_em}" aria-label="Oferta expira em ${label}"${tooltip ? ` title="${tooltip}"` : ''}>
+                <i class="fas fa-clock" aria-hidden="true"></i> Expira em <span class="expiry-countdown__time">${label}</span>
+            </div>`;
+        }
+
+        function buildCategoryBadge(p) {
+            const cat   = (p.categoria || 'geral').toLowerCase();
+            const color = CAT_COLORS[cat] || 'var(--gray)';
+            const label = (p.categoria || 'OFF').toUpperCase();
+            return `<div class="tag" style="background:${color}" aria-label="Categoria: ${label}">${label}</div>`;
+        }
+
+        function buildNoImageFallback(p) {
+            const catIcons = {
+                tech:  'fa-microchip',
+                moda:  'fa-tshirt',
+                casa:  'fa-couch',
+                promo: 'fa-fire',
+                geral: 'fa-tag'
+            };
+            const cat   = (p.categoria || 'geral').toLowerCase();
+            const icon  = catIcons[cat] || 'fa-tag';
+            const color = CAT_COLORS[cat] || 'var(--gray)';
+            return `<div class="card-no-image" style="background:linear-gradient(135deg,${color}22,${color}11)">
+                        <i class="fas ${icon}" style="color:${color}" aria-hidden="true"></i>
+                    </div>`;
+        }
+
+        function buildReviewBadge(p) {
+            const review = allPosts.find(r =>
+                (getTipo(r) === 'review' || getTipo(r) === 'blog') &&
+                r.produto_relacionado === p.id
+            );
+            if (!review) return '';
+            return `<a href="#/${getTipo(review)}/${review.id}"
+                       class="card-review-badge"
+                       aria-label="Ver review de ${p.titulo}">
+                <i class="fas fa-star-half-alt" aria-hidden="true"></i> Ver Review
+            </a>`;
+        }
+
+        function buildVerificadoBadge(p) {
+            if (!p.verificado_em) return '';
+            const horasAtras = Math.round((Date.now() - p.verificado_em) / 3600000);
+            const label = horasAtras < 1
+                ? 'há menos de 1h'
+                : horasAtras === 1
+                    ? 'há 1h'
+                    : `há ${horasAtras}h`;
+            return `<div class="verificado-badge" aria-label="Preço verificado ${label}">
+                <i class="fas fa-check-circle" aria-hidden="true"></i> Preço verificado ${label}
+            </div>`;
+        }
+
+        /* [U3] btn-buy desabilitado quando sem link; [N3/P4] proxy imagem; [I6] UTM afiliado */
+        function buildProductCard(p, index) {
+            const tipo         = getTipo(p);
+            const hasLink      = !!p.link;
+            const externalLink = hasLink ? normalizeAffiliateLink(p.link, p.id) : '#';
+            const internalUrl  = getSiteUrl(p);
+            const { pFinal, desc } = calcPrice(p);
+            const priceIsValid = pFinal !== '0,00';
+
+            const shareTextRaw = `🔥 ${p.titulo}` +
+                (priceIsValid ? `\n💰 R$ ${pFinal}${desc > 0 ? ` (${Math.round(desc)}% OFF)` : ''}` : '') +
+                `\n\nConfira: ${internalUrl}`;
+            const shareText     = encodeURIComponent(shareTextRaw);
+            const ctaText       = hasLink
+                ? `Ver Oferta${desc > 0 ? ' — ' + Math.round(desc) + '% OFF' : ''}`
+                : 'Link indisponível';
+
+            const dealScore    = calcDealScoreDisplay(p);
+            const wishlist     = getWishlist();
+            const inWishlist   = wishlist.includes(p.id);
+            const wishIcon     = inWishlist
+                ? '<i class="fas fa-heart" style="color:#ef4444"></i>'
+                : '<i class="far fa-heart"></i>';
+
+            const imgUrl = p.imagem ? optimizeImageUrl(p.imagem) : '';
+
+            const btnBuyAttrs = hasLink
+                ? `href="${externalLink}" target="_blank" rel="noopener noreferrer" onclick="trackAffiliate('${p.id}','${(p.titulo||'').replace(/'/g,"\\'")}','${p.categoria||''}')"`
+                : `href="#" style="opacity:0.5;pointer-events:none;cursor:not-allowed" aria-disabled="true"`;
+
+            return `
+            <div class="product-card" style="animation-delay:${Math.min(index * 35, 280)}ms">
+                ${buildCategoryBadge(p)}
+                ${buildDiscountBadge(p)}
+                <a href="#/${tipo}/${p.id}" class="card-image-link" aria-label="Ver detalhes de ${p.titulo}">
+                    ${p.imagem
+                        ? `<img src="${imgUrl}" loading="lazy" decoding="async" alt="${p.titulo}"
+                                width="300" height="300"
+                                style="width:100%;height:100%;object-fit:contain;aspect-ratio:1/1;">`
+                        : buildNoImageFallback(p)
+                    }
+                </a>
+                <a href="#/${tipo}/${p.id}" class="product-title-link">
+                    <h3 class="product-title">${p.titulo}</h3>
+                </a>
+                ${buildPriceBox(p)}
+                ${buildExpiryCountdown(p)}
+                ${buildScarcityBadge(p)}
+                ${buildSocialProof(p)}
+                ${buildReviewBadge(p)}
+                ${buildVerificadoBadge(p)}
+                ${dealScore >= 60 ? `<div class="badge-scarcity" style="background:var(--accent);margin-bottom:6px" aria-label="Deal Score ${dealScore}/100">
+                    <i class="fas fa-bolt" aria-hidden="true"></i> Deal Score: ${dealScore}/100
+                </div>` : ''}
+                <p class="desc-text">${p.descricao || ''}</p>
+                <div class="card-buttons">
+                    <a ${btnBuyAttrs}
+                       class="btn-buy"
+                       aria-label="${hasLink ? 'Ver oferta de ' + p.titulo + ' na loja parceira' : 'Link temporariamente indisponível'}">
+                        <i class="fas ${hasLink ? 'fa-shopping-bag' : 'fa-ban'}" aria-hidden="true"></i> ${ctaText}
+                    </a>
+                    <button class="btn-share"
+                            style="background:var(--accent)"
+                            onclick="nativeShare('${(p.titulo||'').replace(/'/g,"\\'")}','${shareText}')"
+                            aria-label="Compartilhar ${p.titulo}">
+                        <i class="fas fa-share-alt" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn-share"
+                            style="background:var(--gray-light);color:var(--gray)"
+                            onclick="toggleWishlist('${p.id}',this)"
+                            title="${inWishlist ? 'Na lista de desejos' : 'Salvar para depois'}"
+                            aria-label="${inWishlist ? 'Remover da lista de desejos' : 'Salvar para depois'}">
+                        ${wishIcon}
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        function buildBlogCard(p, index) {
+            const tipo   = getTipo(p);
+            const icons  = { review: 'star-half-alt', blog: 'newspaper', news: 'bolt' };
+            const labels = { review: 'Review', blog: 'Blog', news: 'News' };
+            const dateStr = p.timestamp ? formatDate(p.timestamp) : '';
+
+            const relProd = p.produto_relacionado ? postMap.get(p.produto_relacionado) : null;
+            const relLink = relProd ? normalizeAffiliateLink(relProd.link, relProd.id) : null;
+
+            const imgUrl = p.imagem ? optimizeImageUrl(p.imagem) : '';
+
+            return `
+            <article class="blog-card" style="animation-delay:${Math.min(index * 35, 280)}ms">
+                <a href="#/${tipo}/${p.id}" class="blog-card__inner" aria-label="Ler: ${p.titulo}">
+                    ${p.imagem
+                        ? `<div class="blog-card__image">
+                            <img src="${imgUrl}" loading="lazy" decoding="async" alt="${p.titulo}"
+                                 width="400" height="225"
+                                 style="width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;">
+                           </div>`
+                        : ''}
+                    <div class="blog-card__body">
+                        <div class="blog-card__meta">
+                            <span class="type-badge type-badge--${tipo}">
+                                <i class="fas fa-${icons[tipo] || 'file'}" aria-hidden="true"></i>
+                                ${labels[tipo] || tipo}
+                            </span>
+                            ${p.categoria ? `<span class="cat-tag">${p.categoria}</span>` : ''}
+                            ${dateStr ? `<span class="cat-tag" style="color:var(--gray)">${dateStr}</span>` : ''}
+                        </div>
+                        <h3>${p.titulo}</h3>
+                        <p>${p.descricao || ''}</p>
+                        <span class="read-more">Ler mais <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </div>
+                </a>
+                ${relProd && relLink && relLink !== '#' ? `
+                <div style="padding:0 16px 14px">
+                    <a href="${relLink}"
+                       class="btn-buy btn-buy--sm"
+                       style="width:100%;justify-content:center"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       onclick="trackAffiliate('${relProd.id}','${(relProd.titulo||'').replace(/'/g,"\\'")}','blog_card')"
+                       aria-label="Ver oferta de ${relProd.titulo}">
+                        <i class="fas fa-shopping-bag" aria-hidden="true"></i> Ver Oferta
+                    </a>
+                </div>` : ''}
+            </article>`;
+        }
+
+        function buildNewsCard(p, index) {
+            const tipo    = getTipo(p);
+            const snippet = (p.descricao || p.conteudo || '').replace(/<[^>]*>/g, '').substring(0, 110);
+            const imgUrl  = p.imagem ? optimizeImageUrl(p.imagem) : '';
+            return `
+            <article class="news-card" style="animation-delay:${Math.min(index * 35, 280)}ms">
+                <a href="#/${tipo}/${p.id}" class="news-card__link" aria-label="Ler notícia: ${p.titulo}">
+                    ${p.imagem
+                        ? `<div class="news-card__thumb">
+                            <img src="${imgUrl}" loading="lazy" decoding="async" alt="${p.titulo}"
+                                 width="120" height="68"
+                                 style="width:100%;height:100%;object-fit:cover;">
+                           </div>`
+                        : ''}
+                    <div class="news-card__body">
+                        <span class="news-card__badge" aria-label="Categoria">${(p.categoria || 'UPDATE').toUpperCase()}</span>
+                        <h4>${p.titulo}</h4>
+                        ${snippet ? `<p>${snippet}…</p>` : ''}
+                        <span class="read-more">Ler <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </div>
+                </a>
+            </article>`;
+        }
+
+        function buildCard(p, index) {
+            return getTipo(p) === 'produto' ? buildProductCard(p, index) : buildBlogCard(p, index);
+        }
+
+        function buildProductWidget(p) {
+            if (!p) return '';
+            const { pFinal, pAntigo, desc } = calcPrice(p);
+            const ctaText = `Ver Oferta${desc > 0 ? ' — ' + Math.round(desc) + '% OFF' : ''}`;
+            const imgUrl  = p.imagem ? optimizeImageUrl(p.imagem) : '';
+            return `
+            <aside class="product-widget" aria-label="Produto em destaque relacionado a este artigo">
+                <div class="product-widget__label">
+                    <i class="fas fa-tag" aria-hidden="true"></i> Produto em Destaque
+                </div>
+                <div class="product-widget__inner">
+                    ${p.imagem
+                        ? `<a href="#/produto/${p.id}" class="product-widget__img" aria-label="Ver produto: ${p.titulo}">
+                            <img src="${imgUrl}" loading="lazy" decoding="async" alt="${p.titulo}">
+                           </a>`
+                        : ''}
+                    <div class="product-widget__info">
+                        <a href="#/produto/${p.id}" class="product-widget__title">${p.titulo}</a>
+                        <div class="price-box">
+                            ${pAntigo > 0 ? `
+                            <div class="old-price">
+                                <span>R$ ${p.preco_antigo}</span>
+                                <span class="disc-badge">-${Math.round(desc)}%</span>
+                            </div>` : ''}
+                            <div class="current-price">R$ ${pFinal}</div>
+                        </div>
+                        <a href="${normalizeAffiliateLink(p.link, p.id)}"
+                           class="btn-buy btn-buy--sm"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           onclick="trackAffiliate('${p.id}','${(p.titulo||'').replace(/'/g,"\\'")}','widget')">
+                            <i class="fas fa-shopping-bag" aria-hidden="true"></i> ${ctaText}
+                        </a>
+                    </div>
+                </div>
+            </aside>`;
+        }
+
+        function buildRelatedProductsGrid(currentPost) {
+            const cat = (currentPost.categoria || 'geral').toLowerCase();
+            const sameCat = [];
+            const crossCat = [];
+
+            allPosts.forEach(p => {
+                if (getTipo(p) !== 'produto' || p.id === currentPost.id) return;
+                if ((p.categoria || 'geral').toLowerCase() === cat) {
+                    sameCat.push(p);
+                } else {
+                    crossCat.push(p);
+                }
+            });
+
+            const needed = 6;
+            const related = sameCat.slice(0, needed).concat(
+                crossCat.slice(0, needed - Math.min(sameCat.length, needed))
+            );
+
+            if (related.length === 0) return '';
+
+            return `
+            <div class="related-products" aria-label="Produtos similares">
+                <h3><i class="fas fa-th-large" aria-hidden="true"></i> Produtos Similares</h3>
+                <div class="related-products-grid">
+                    ${related.map(p => {
+                        const { pFinal } = calcPrice(p);
+                        const imgUrl = p.imagem ? optimizeImageUrl(p.imagem) : '';
+                        return `
+                        <a href="#/produto/${p.id}" class="related-product-card" aria-label="Ver ${p.titulo}">
+                            <div class="related-product-card__img">
+                                ${p.imagem
+                                    ? `<img src="${imgUrl}" loading="lazy" decoding="async" alt="${p.titulo}"
+                                            style="width:100%;height:100%;object-fit:contain;aspect-ratio:1/1;">`
+                                    : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--gray-xlight);aspect-ratio:1/1;"><i class="fas fa-tag" style="color:var(--gray)"></i></div>`
+                                }
+                            </div>
+                            <span class="related-product-card__title">${p.titulo}</span>
+                            <span class="related-product-card__price">R$ ${pFinal}</span>
+                        </a>`;
+                    }).join('')}
+                </div>
+            </div>`;
+        }
+
+        function buildSimilarArticles(currentPost) {
+            const cat       = (currentPost.categoria || '').toLowerCase();
+            const tipoAtual = getTipo(currentPost);
+            const now       = Date.now();
+            const WEEK      = 7 * 24 * 3600 * 1000;
+            const titleTokens = (currentPost.titulo || '')
+                .toLowerCase()
+                .split(/\s+/)
+                .filter(w => w.length > 3);
+
+            const scored = allPosts
+                .filter(p => p.id !== currentPost.id && getTipo(p) !== 'produto')
+                .map(p => {
+                    let score = 0;
+                    const pCat    = (p.categoria || '').toLowerCase();
+                    const pTipo   = getTipo(p);
+                    const pTokens = (p.titulo || '').toLowerCase().split(/\s+/);
+
+                    if (cat && pCat === cat) score += 3;
+                    if (pTipo === tipoAtual)  score += 1;
+                    titleTokens.forEach(t => { if (pTokens.includes(t)) score += 2; });
+                    if ((p.timestamp || 0) > now - WEEK) score += 1;
+
+                    return { p, score };
+                })
+                .filter(({ score }) => score > 0)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 4)
+                .map(({ p }) => p);
+
+            const similar = scored.length > 0
+                ? scored
+                : allPosts
+                    .filter(p => p.id !== currentPost.id && getTipo(p) === tipoAtual)
+                    .slice(0, 4);
+
+            if (similar.length === 0) return '';
+
+            const typeLabels = { review: 'Review', blog: 'Blog', news: 'Notícia' };
+
+            return `
+            <div class="similar-articles" aria-label="Artigos relacionados">
+                <h3><i class="fas fa-newspaper" aria-hidden="true"></i> Continue Lendo</h3>
+                <ul class="similar-articles-list">
+                    ${similar.map(p => {
+                        const imgUrl = p.imagem ? optimizeImageUrl(p.imagem) : '';
+                        return `
+                    <li>
+                        <a href="#/${getTipo(p)}/${p.id}" class="similar-article-link" aria-label="Ler: ${p.titulo}">
+                            <div class="similar-article-link__img">
+                                ${p.imagem
+                                    ? `<img src="${imgUrl}" loading="lazy" decoding="async" alt="${p.titulo}">`
+                                    : ''
+                                }
+                            </div>
+                            <div class="similar-article-link__body">
+                                <span>${p.titulo}</span>
+                                <small>${typeLabels[getTipo(p)] || 'Artigo'}${p.categoria ? ` · ${p.categoria}` : ''}</small>
+                            </div>
+                            <i class="fas fa-chevron-right" style="color:var(--gray);font-size:0.7rem;flex-shrink:0" aria-hidden="true"></i>
+                        </a>
+                    </li>`}).join('')}
+                </ul>
+            </div>`;
+        }
+
+        function buildLeadWidget(inline = false) {
+            return `
+            <div class="lead-widget${inline ? ' lead-widget--inline' : ''}" aria-label="Receba ofertas exclusivas">
+                <div class="lead-widget__icon">🛍️</div>
+                <div class="lead-widget__title">Não perca nenhuma oferta!</div>
+                <p class="lead-widget__sub">
+                    Junte-se ao nosso grupo e receba as melhores promoções em primeira mão,
+                    direto no seu celular.
+                </p>
+                <div class="lead-widget__actions">
+                    <a href="https://chat.whatsapp.com/GA5oIfwFgZBJXdH2TYGkVG?mode=gi_t"
+                       class="lead-widget__btn lead-widget__btn--whatsapp"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Entrar no grupo de ofertas no WhatsApp">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Grupo WhatsApp
+                    </a>
+                    <a href="https://t.me/tauikerstore"
+                       class="lead-widget__btn lead-widget__btn--telegram"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Seguir canal de ofertas no Telegram">
+                        <i class="fab fa-telegram-plane" aria-hidden="true"></i> Canal Telegram
+                    </a>
+                </div>
+                <div class="lead-widget__email-form">
+                    <input type="email"
+                           class="lead-widget__email-input"
+                           placeholder="Seu melhor e-mail para ofertas..."
+                           aria-label="Digite seu e-mail para receber ofertas">
+                    <button class="lead-widget__email-btn"
+                            onclick="submitLeadEmail(this)"
+                            type="button"
+                            aria-label="Receber ofertas por e-mail">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Receber Ofertas
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        window.submitLeadEmail = async function(btn) {
+            const form  = btn.closest('.lead-widget__email-form');
+            const input = form?.querySelector('.lead-widget__email-input');
+            const email = input?.value.trim();
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('Digite um e-mail válido.', 'error');
+                input?.focus();
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Salvando...';
+            if (input) input.disabled = true;
+
+            try {
+                const existingQuery = query(
+                    ref(db, 'leads'),
+                    orderByChild('email'),
+                    equalTo(email)
+                );
+                const snapshot = await get(existingQuery);
+
+                if (snapshot.exists()) {
+                    showToast('✅ E-mail já cadastrado! Você já receberá nossas ofertas.', 'success');
+                    if (input) input.value = '';
+                } else {
+                    await push(ref(db, 'leads'), {
+                        email,
+                        timestamp: Date.now(),
+                        source: window.location.hash || '#/'
+                    });
+                    showToast('✅ E-mail cadastrado! Em breve você receberá ofertas.', 'success');
+                    if (input) input.value = '';
+                }
+            } catch (e) {
+                showToast('Erro ao cadastrar. Tente novamente.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-envelope" aria-hidden="true"></i> Receber Ofertas';
+                if (input) input.disabled = false;
+            }
+        };
+
+        /* [F1/M6] verTodosHref correto para review e blog */
+        function buildSection(tipo, posts, globalIndex = 0) {
+            const cfg = SECTION_CONFIG[tipo];
+            if (!cfg || posts.length === 0) return '';
+
+            const cardFn = cfg.cardFn();
+
+            const verTodosHref = tipo === 'produto'
+                ? '#/categoria/todos'
+                : tipo === 'review'
+                    ? '#/categoria/review'
+                    : tipo === 'blog'
+                        ? '#/categoria/blog'
+                        : '#/news';
+
+            let gridContent = '';
+            const AD_INTERVAL = 5;
+
+            posts.forEach((p, i) => {
+                gridContent += cardFn(p, globalIndex + i);
+
+                if (tipo === 'produto' && (i + 1) % AD_INTERVAL === 0 && i < posts.length - 1) {
+                    const slotN = Math.min(Math.floor((i + 1) / AD_INTERVAL), 3);
+                    gridContent += `
+                    <div class="ad-slot ad-slot--grid-inline"
+                         aria-hidden="true"
+                         data-ad-position="feed-inline-${slotN}"></div>`;
+                }
+            });
+
+            return `
+            <div class="category-section category-section--${tipo}">
+                <div class="section-header">
+                    <div class="section-header__accent" aria-hidden="true"></div>
+                    <i class="${cfg.icon} section-header__icon" aria-hidden="true"></i>
+                    <h2>${cfg.title}</h2>
+                    <span class="section-header__count">${posts.length}</span>
+                    <a href="${verTodosHref}" class="ver-todos" aria-label="Ver todos os ${cfg.title.toLowerCase()}">
+                        Ver todos <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="${cfg.gridClass}">
+                    ${gridContent}
+                </div>
+            </div>`;
+        }
+
+        function buildSectionedFeed(order, pool = allPosts, afterFirstHtml = '') {
+            let globalIndex = 0;
+            let html        = '';
+            let sectionsRendered = 0;
+
+            order.forEach((tipo, orderIndex) => {
+                const posts = pool.filter(p => getTipo(p) === tipo);
+                if (posts.length === 0) return;
+
+                const section = buildSection(tipo, posts, globalIndex);
+                if (!section) return;
+
+                html += section;
+                globalIndex += posts.length;
+                sectionsRendered++;
+
+                if (sectionsRendered === 1) {
+                    html += afterFirstHtml;
+                    html += buildLeadWidget();
+                }
+
+                if (sectionsRendered > 1 && orderIndex < order.length - 1) {
+                    html += `
+                    <div class="ad-slot ad-slot--feed"
+                         aria-hidden="true"
+                         data-ad-position="feed-${sectionsRendered - 1}">
+                    </div>`;
+                }
+            });
+
+            return html || `<div class="empty-state" role="alert">
+                <i class="fas fa-inbox" aria-hidden="true"></i>
+                <h3>Nenhum conteúdo disponível</h3>
+                <p>Volte em breve para novidades.</p>
+            </div>`;
+        }
+
+        /* [U4] btn-back adicionado nas páginas estáticas */
+        function renderStatic(page) {
+            document.title = `${page.charAt(0).toUpperCase() + page.slice(1)} | Tauiker Store`;
+            const ogUrl = window.location.origin + window.location.pathname + '#/' + page;
+            updateOG({ title: document.title, description: 'Tauiker Store', url: ogUrl, type: 'website' });
+            setCanonical(ogUrl);
+
+            const pages = {
+                politica: {
+                    icon: 'fas fa-shield-alt',
+                    title: 'Política de Privacidade',
+                    content: `<p>A Tauiker Store respeita sua privacidade. Coletamos apenas os dados necessários para o funcionamento do site e não os compartilhamos com terceiros sem sua autorização.</p>
+                    <p>Utilizamos cookies para melhorar a experiência de navegação. Ao continuar utilizando nosso site, você concorda com o uso de cookies.</p>
+                    <p>Os links de produtos direcionam para lojas parceiras, que possuem suas próprias políticas de privacidade. Recomendamos que você as leia antes de realizar qualquer compra.</p>
+                    <p>Para dúvidas sobre privacidade, entre em contato: <strong>tauikerstore@gmail.com</strong></p>`
+                },
+                termos: {
+                    icon: 'fas fa-file-alt',
+                    title: 'Termos de Uso',
+                    content: `<p>Bem-vindo à Tauiker Store. Ao acessar este site, você concorda com os termos abaixo.</p>
+                    <p>A Tauiker Store é um portal de divulgação de ofertas e conteúdo editorial. Os links de produtos são links de afiliados — recebemos comissão sobre vendas realizadas, sem custo adicional para você.</p>
+                    <p>Não nos responsabilizamos por alterações de preço, disponibilidade de estoque ou condições de venda nas lojas parceiras. Sempre confirme as informações antes de finalizar sua compra.</p>
+                    <p>O conteúdo editorial (reviews, blogs, news) reflete a opinião da equipe Tauiker Store e é fornecido para fins informativos.</p>`
+                },
+                contato: {
+                    icon: 'fas fa-comment-dots',
+                    title: 'Fale Conosco',
+                    content: `<p>Estamos à disposição para dúvidas, sugestões ou parcerias.</p>`
+                }
+            };
+
+            const p = pages[page] || pages.contato;
+
+            setView(`
+                <div class="container single-container">
+                    <a href="javascript:void(0)"
+                       onclick="window.navigatedInternally ? history.back() : (location.hash='#/')"
+                       class="btn-back" aria-label="Voltar à página anterior">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar
+                    </a>
+                    <div class="static-page">
+                        <i class="${p.icon}" aria-hidden="true"></i>
+                        <h2>${p.title}</h2>
+                        ${p.content}
+                        ${page === 'contato' ? `
+                        <div class="static-contacts">
+                            <a href="https://chat.whatsapp.com/GA5oIfwFgZBJXdH2TYGkVG?mode=gi_t" class="contact-link contact-link--whatsapp" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                <span><strong>Grupo WhatsApp</strong><em>Entrar no grupo de ofertas</em></span>
+                            </a>
+                            <a href="https://wa.me/5563981050019" class="contact-link contact-link--whatsapp" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                <span><strong>WhatsApp Pessoal</strong><em>+55 63 98105-0019</em></span>
+                            </a>
+                            <a href="https://t.me/tauikerstore" class="contact-link contact-link--telegram" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                                <span><strong>Canal Telegram</strong><em>@tauikerstore</em></span>
+                            </a>
+                            <a href="https://t.me/tauikerstores" class="contact-link contact-link--telegram" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                                <span><strong>Telegram Pessoal</strong><em>@tauikerstores</em></span>
+                            </a>
+                            <a href="mailto:tauikerstore@gmail.com" class="contact-link contact-link--email">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span><strong>E-mail</strong><em>tauikerstore@gmail.com</em></span>
+                            </a>
+                        </div>` : ''}
+                    </div>
+                </div>`);
+        }
+
+        function renderHome() {
+            document.title = 'Tauiker Store | Ofertas Selecionadas em Tech e Lifestyle';
+            const homeUrl = window.location.origin + window.location.pathname;
+            updateOG({
+                title: 'Tauiker Store | Ofertas Selecionadas',
+                description: 'Qualidade em cada achadinho. Sua central de ofertas selecionadas em tech e lifestyle.',
+                url: homeUrl,
+                type: 'website'
+            });
+            setCanonical(homeUrl);
+
+            setView(`
+                ${buildDynamicHero()}
+                <div class="ad-slot ad-slot--header-atf"
+                     aria-hidden="true"
+                     data-ad-position="atf"></div>
+                <div class="container page-feed">
+                    ${buildSectionedFeed(HOME_ORDER, allPosts, buildRecentlyViewed())}
+                </div>`, () => startHeroCountdown(lastHeroId, lastHeroExpiraEm));
+
+            startFomoEngine();
+        }
+
+        function renderCategoria(slug) {
+            const name = CAT_NAMES[slug] || slug;
+            document.title = `${name} | Tauiker Store`;
+            const catUrl = window.location.origin + window.location.pathname + '#/categoria/' + slug;
+            updateOG({
+                title: `${name} | Tauiker Store`,
+                description: `Confira as melhores ofertas em ${name} na Tauiker Store.`,
+                url: catUrl,
+                type: 'website'
+            });
+            setCanonical(catUrl);
+
+            let pool;
+            if (slug === 'todos') {
+                pool = allPosts.filter(p => getTipo(p) === 'produto');
+            } else if (slug === 'review' || slug === 'blog') {
+                pool = allPosts.filter(p => getTipo(p) === slug);
+            } else {
+                pool = allPosts.filter(p => (p.categoria || '').toLowerCase() === slug);
+            }
+
+            let gridContent = '';
+            const AD_INTERVAL_CAT = 5;
+            pool.forEach((p, i) => {
+                gridContent += getTipo(p) === 'produto' ? buildProductCard(p, i) : buildBlogCard(p, i);
+
+                if ((i + 1) % AD_INTERVAL_CAT === 0 && i < pool.length - 1) {
+                    const slotN = Math.min(Math.floor((i + 1) / AD_INTERVAL_CAT), 3);
+                    gridContent += `
+                    <div class="ad-slot ad-slot--grid-inline"
+                         aria-hidden="true"
+                         data-ad-position="feed-inline-${slotN}"></div>`;
+                }
+            });
+
+            let editorialCross = '';
+            if (slug === 'todos') {
+                const editorial = allPosts
+                    .filter(p => getTipo(p) !== 'produto')
+                    .slice(0, 4);
+                if (editorial.length > 0) {
+                    editorialCross = `
+                    <div class="category-section category-section--blog" style="margin-top:40px">
+                        <div class="section-header">
+                            <div class="section-header__accent" aria-hidden="true"></div>
+                            <i class="fas fa-newspaper section-header__icon" aria-hidden="true"></i>
+                            <h2>CONTEÚDO EDITORIAL</h2>
+                            <a href="#/news" class="ver-todos" aria-label="Ver todo o conteúdo editorial">
+                                Ver todos <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="products-grid">
+                            ${editorial.map((p, i) => buildBlogCard(p, i)).join('')}
+                        </div>
+                    </div>`;
+                }
+            }
+
+            setView(`
+                <div class="hero-banner hero-banner--sm">
+                    <div class="container">
+                        <h2><i class="fas fa-tag" aria-hidden="true"></i> ${name}</h2>
+                        <p>${pool.length} ${pool.length === 1 ? 'item encontrado' : 'itens encontrados'}</p>
+                    </div>
+                </div>
+                <div class="ad-slot ad-slot--header-atf"
+                     aria-hidden="true"
+                     data-ad-position="atf"></div>
+                <div class="container page-feed">
+                    ${pool.length === 0
+                        ? `<div class="empty-state" role="alert">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <h3>Nenhum item nesta categoria</h3>
+                            <p>Tente explorar outras categorias.</p>
+                           </div>`
+                        : `<div class="products-grid">
+                            ${gridContent}
+                           </div>
+                           ${editorialCross}`
+                    }
+                </div>`, () => {
+                startFomoEngine();
+            });
+        }
+
+        function renderNews() {
+            document.title = 'Novidades | Tauiker Store';
+            const newsUrl = window.location.origin + window.location.pathname + '#/news';
+            updateOG({
+                title: 'Novidades | Tauiker Store',
+                description: 'Fique por dentro de tudo da Tauiker Store — reviews, blog e notícias.',
+                url: newsUrl,
+                type: 'website'
+            });
+            setCanonical(newsUrl);
+
+            setView(`
+                <div class="hero-banner hero-banner--sm">
+                    <div class="container">
+                        <h2><i class="fas fa-newspaper" aria-hidden="true"></i> Novidades</h2>
+                        <p>Fique por dentro de tudo da Tauiker Store.</p>
+                    </div>
+                </div>
+                <div class="ad-slot ad-slot--header-atf"
+                     aria-hidden="true"
+                     data-ad-position="atf"></div>
+                <div class="container page-feed">
+                    ${buildSectionedFeed(NEWS_ORDER)}
+                </div>`);
+        }
+
+        function renderWishlist() {
+            document.title = 'Minha Lista de Desejos | Tauiker Store';
+            const wlUrl = window.location.origin + window.location.pathname + '#/wishlist';
+            updateOG({
+                title: 'Minha Lista de Desejos | Tauiker Store',
+                description: 'Produtos que você salvou para conferir depois.',
+                url: wlUrl,
+                type: 'website'
+            });
+            setCanonical(wlUrl);
+
+            const ids      = getWishlist();
+            const products = ids.map(id => postMap.get(id)).filter(Boolean);
+
+            setView(`
+                <div class="hero-banner hero-banner--sm">
+                    <div class="container">
+                        <h2><i class="fas fa-heart" style="color:#ef4444" aria-hidden="true"></i> Minha Lista de Desejos</h2>
+                        <p>${products.length} ${products.length === 1 ? 'item salvo' : 'itens salvos'}</p>
+                    </div>
+                </div>
+                <div class="container page-feed">
+                    ${products.length === 0
+                        ? `<div class="empty-state" role="alert">
+                            <i class="fas fa-heart-broken" aria-hidden="true"></i>
+                            <h3>Sua lista está vazia</h3>
+                            <p>Salve produtos com o ❤️ para encontrá-los aqui depois.</p>
+                            <a href="#/" class="btn-buy" style="display:inline-flex;margin-top:24px;max-width:220px;">
+                                <i class="fas fa-home" aria-hidden="true"></i> Ver produtos
+                            </a>
+                           </div>`
+                        : `<div class="products-grid">
+                            ${products.map((p, i) => buildProductCard(p, i)).join('')}
+                           </div>`
+                    }
+                </div>`, () => { startFomoEngine(); });
+        }
+
+        function renderSingle(id) {
+            const post = postMap.get(id);
+            if (!post) {
+                document.title = 'Item não encontrado | Tauiker Store';
+                setView(`
+                    <div class="container page-feed">
+                        <div class="empty-state" role="alert">
+                            <i class="fas fa-unlink" aria-hidden="true"></i>
+                            <h3>Item não encontrado</h3>
+                            <p>Este conteúdo pode ter sido removido ou o link está incorreto.</p>
+                            <a href="#/" class="btn-buy"
+                               style="display:inline-flex;margin-top:24px;max-width:220px;">
+                                <i class="fas fa-home" aria-hidden="true"></i> Voltar ao início
+                            </a>
+                        </div>
+                    </div>`);
+                return;
+            }
+            getTipo(post) === 'produto' ? renderProductSingle(post) : renderArticleSingle(post);
+        }
+
+        /* [U3] CTA desabilitado sem link; [C5] fomo filtrado por produto atual */
+        function renderProductSingle(post) {
+            document.title = `${post.titulo} | Tauiker Store`;
+            const hasLink      = !!post.link;
+            const externalLink = hasLink ? normalizeAffiliateLink(post.link, post.id) : '#';
+            const internalUrl  = getSiteUrl(post);
+            const { pFinal, desc } = calcPrice(post);
+            const priceIsValid = pFinal !== '0,00';
+
+            setCanonical(internalUrl);
+
+            const shareText = encodeURIComponent(
+                `🔥 ${post.titulo}` +
+                (priceIsValid ? `\n💰 R$ ${pFinal}${desc > 0 ? ` (${Math.round(desc)}% OFF)` : ''}` : '') +
+                `\n\nConfira: ${internalUrl}`
+            );
+
+            updateOG({
+                title: `${post.titulo} | Tauiker Store`,
+                description: post.descricao || 'Confira esta oferta na Tauiker Store.',
+                url: internalUrl,
+                image: post.imagem || CONFIG.OG_DEFAULT_IMAGE,
+                type: 'website'
+            });
+
+            const schemaScript = document.getElementById('schema-product');
+            if (schemaScript) schemaScript.remove();
+            if (post.titulo) {
+                const ld = document.createElement('script');
+                ld.type = 'application/ld+json';
+                ld.id   = 'schema-product';
+                const isExpired = post.expira_em && post.expira_em < Date.now();
+                const schemaObj = {
+                    '@context': 'https://schema.org/',
+                    '@type': 'Product',
+                    name: post.titulo,
+                    description: post.descricao || '',
+                    image: post.imagem ? [post.imagem] : [],
+                    url: internalUrl
+                };
+                if (priceIsValid) {
+                    schemaObj.offers = {
+                        '@type': 'Offer',
+                        priceCurrency: 'BRL',
+                        price: normalizeNum(pFinal).toFixed(2),
+                        availability: isExpired
+                            ? 'https://schema.org/OutOfStock'
+                            : 'https://schema.org/InStock',
+                        url: externalLink
+                    };
+                }
+                ld.textContent = JSON.stringify(schemaObj);
+                document.head.appendChild(ld);
+            }
+
+            const clickKey = 'ts_ck_' + post.id;
+            if (!sessionStorage.getItem(clickKey)) {
+                update(ref(db, `posts/${post.id}`), { clicks: increment(1) });
+                sessionStorage.setItem(clickKey, '1');
+            }
+
+            /* Incrementar views por visita à página de produto */
+            const viewKey = 'ts_vw_' + post.id;
+            if (!sessionStorage.getItem(viewKey)) {
+                update(ref(db, `posts/${post.id}`), { views: increment(1) }).catch(() => {});
+                sessionStorage.setItem(viewKey, '1');
+            }
+
+            addToRecentlyViewed(post.id);
+
+            const related = allPosts.filter(p =>
+                (getTipo(p) === 'review' || getTipo(p) === 'blog') &&
+                p.produto_relacionado === post.id
+            );
+
+            const mainCtaText = hasLink
+                ? `Ver Oferta Completa${desc > 0 ? ' — ' + Math.round(desc) + '% OFF' : ''}`
+                : 'Link temporariamente indisponível';
+
+            const catLabel = post.categoria ? (post.categoria.charAt(0).toUpperCase() + post.categoria.slice(1)) : 'Produtos';
+            const catHref  = post.categoria ? `#/categoria/${post.categoria.toLowerCase()}` : '#/categoria/todos';
+            const breadcrumb = `
+            <nav class="breadcrumb" aria-label="Navegação estrutural"
+                 style="display:flex;align-items:center;gap:6px;font-size:0.72rem;color:var(--gray);margin-bottom:16px;flex-wrap:wrap">
+                <a href="#/" style="color:var(--gray);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--gray)'">Início</a>
+                <span aria-hidden="true" style="color:var(--gray-light)">›</span>
+                <a href="${catHref}" style="color:var(--gray);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--gray)'">${catLabel}</a>
+                <span aria-hidden="true" style="color:var(--gray-light)">›</span>
+                <span style="color:var(--primary);font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:200px">${post.titulo}</span>
+            </nav>`;
+
+            const descLines = (post.descricao || '').split(/[.!?]\s+/).filter(Boolean).slice(0, 3);
+            const descEnhanced = descLines.length > 1
+                ? `<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+                    ${descLines.map(line => `<li style="display:flex;align-items:flex-start;gap:8px;font-size:0.9rem;color:var(--gray);line-height:1.7">
+                        <i class="fas fa-check-circle" style="color:var(--green);font-size:0.8rem;margin-top:4px;flex-shrink:0" aria-hidden="true"></i>
+                        <span>${line.trim()}.</span>
+                    </li>`).join('')}
+                   </ul>`
+                : `<p class="single-desc">${post.descricao || ''}</p>`;
+            const wishlist     = getWishlist();
+            const inWishlist   = wishlist.includes(post.id);
+            const wishIcon     = inWishlist
+                ? '<i class="fas fa-heart" style="color:#ef4444"></i>'
+                : '<i class="far fa-heart"></i>';
+
+            const singleImgUrl = post.imagem ? optimizeImageUrl(post.imagem) : '';
+
+            const ctaBuyAttrs = hasLink
+                ? `href="${externalLink}" target="_blank" rel="noopener noreferrer" onclick="trackAffiliate('${post.id}','${(post.titulo||'').replace(/'/g,"\\'")}','single')"`
+                : `href="#" style="opacity:0.5;pointer-events:none;cursor:not-allowed" aria-disabled="true"`;
+
+            setView(`
+                <div class="container single-container">
+                    ${breadcrumb}
+                    <a href="javascript:void(0)"
+                       onclick="window.navigatedInternally ? history.back() : (location.hash='#/')"
+                       class="btn-back" aria-label="Voltar à página anterior">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar
+                    </a>
+                    <div class="single-product">
+                        <div class="single-product__gallery">
+                            ${post.imagem
+                                ? `<img src="${singleImgUrl}"
+                                       loading="eager"
+                                       fetchpriority="high"
+                                       decoding="async"
+                                       alt="${post.titulo}"
+                                       class="single-product__img"
+                                       width="600"
+                                       height="600"
+                                       style="aspect-ratio:1/1;object-fit:contain;">`
+                                : `<div class="card-no-image card-no-image--lg" aria-hidden="true">
+                                       ${buildNoImageFallback(post)}
+                                   </div>`}
+                        </div>
+                        <div class="single-product__info">
+                            <span class="tag tag--lg"
+                                  style="background:${CAT_COLORS[post.categoria] || 'var(--accent)'}">
+                                ${(post.categoria || 'OFF').toUpperCase()}
+                            </span>
+                            <h1>${post.titulo}</h1>
+                            ${desc > 0 ? `<div class="badge-discount badge-discount--lg${desc >= 20 ? ' badge-discount--pulse' : ''}" aria-label="Desconto de ${Math.round(desc)}%">🔥 ${Math.round(desc)}% OFF</div>` : ''}
+                            ${buildSocialProof(post)}
+                            ${buildVerificadoBadge(post)}
+                            ${buildPriceBox(post)}
+                            ${buildExpiryCountdown(post)}
+                            ${descEnhanced}
+                            <div class="single-actions" id="singleActionsBtn">
+                                <a ${ctaBuyAttrs}
+                                   class="btn-buy btn-buy--large"
+                                   id="singleBuyBtn"
+                                   aria-label="${hasLink ? 'Ver oferta completa de ' + post.titulo : 'Link temporariamente indisponível'}">
+                                    <i class="fas ${hasLink ? 'fa-shopping-bag' : 'fa-ban'}" aria-hidden="true"></i> ${mainCtaText}
+                                </a>
+                                <button class="btn-share btn-share--lg"
+                                        style="background:var(--accent)"
+                                        onclick="nativeShare('${(post.titulo||'').replace(/'/g,"\\'")}','${shareText}')"
+                                        aria-label="Compartilhar ${post.titulo}">
+                                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn-share btn-share--lg"
+                                        style="background:var(--gray-light);color:var(--gray)"
+                                        onclick="toggleWishlist('${post.id}',this)"
+                                        title="${inWishlist ? 'Na lista de desejos' : 'Salvar para depois'}"
+                                        aria-label="${inWishlist ? 'Remover da lista de desejos' : 'Salvar para depois'}">
+                                    ${wishIcon}
+                                </button>
+                            </div>
+
+                            ${related.length > 0 ? `
+                            <div class="related-content" aria-label="Conteúdo relacionado">
+                                <h3><i class="fas fa-newspaper" aria-hidden="true"></i> Conteúdo Relacionado</h3>
+                                <ul class="related-list">
+                                    ${related.map(r => `
+                                    <li>
+                                        <a href="#/${getTipo(r)}/${r.id}" class="related-link" aria-label="${r.titulo}">
+                                            <i class="fas fa-star-half-alt related-link__icon" aria-hidden="true"></i>
+                                            <span>
+                                                <strong>${getTipo(r).toUpperCase()}</strong>
+                                                <em>${r.titulo}</em>
+                                            </span>
+                                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                        </a>
+                                    </li>`).join('')}
+                                </ul>
+                            </div>` : ''}
+
+                            ${buildRelatedProductsGrid(post)}
+                        </div>
+                    </div>
+
+                    <div class="ad-slot ad-slot--product"
+                         aria-hidden="true"
+                         data-ad-position="product-bottom"></div>
+
+                    ${buildLeadWidget(true)}
+                </div>`
+            , () => {
+                /* [C5] fomo exclui produto atual */
+                startFomoEngine(post.id);
+
+                if (priceIsValid && hasLink) {
+                    const stickyBar = document.createElement('div');
+                    stickyBar.className = 'sticky-cta-bar';
+                    stickyBar.id        = 'stickyCta';
+                    stickyBar.setAttribute('aria-hidden', 'true');
+
+                    const stickyCtaText = `Ver Oferta${desc > 0 ? ' — ' + Math.round(desc) + '% OFF' : ''}`;
+                    stickyBar.innerHTML = `
+                        <div class="sticky-cta-bar__price">
+                            <strong>R$ ${pFinal}</strong>
+                            <small>${(post.titulo || '').substring(0, 36)}${(post.titulo || '').length > 36 ? '…' : ''}</small>
+                        </div>
+                        <a href="${externalLink}"
+                           class="btn-buy sticky-cta-bar__btn"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           onclick="trackAffiliate('${post.id}','${(post.titulo||'').replace(/'/g,"\\'")}','sticky_cta')"
+                           aria-label="Ver oferta completa">
+                            <i class="fas fa-shopping-bag" aria-hidden="true"></i> ${stickyCtaText}
+                        </a>`;
+                    document.body.appendChild(stickyBar);
+
+                    const buyBtn = document.getElementById('singleBuyBtn');
+                    if (buyBtn && 'IntersectionObserver' in window) {
+                        const obs = new IntersectionObserver(entries => {
+                            entries.forEach(entry => {
+                                if (!entry.isIntersecting) {
+                                    stickyBar.classList.add('visible');
+                                    stickyBar.setAttribute('aria-hidden', 'false');
+                                    document.body.classList.add('has-sticky-cta');
+                                } else {
+                                    stickyBar.classList.remove('visible');
+                                    stickyBar.setAttribute('aria-hidden', 'true');
+                                    document.body.classList.remove('has-sticky-cta');
+                                }
+                            });
+                        }, { threshold: 0 });
+                        obs.observe(buyBtn);
+                    }
+                }
+            });
+        }
+
+        /* [C5] fomo filtrado pelo post atual no artigo */
+        function renderArticleSingle(post) {
+            document.title = `${post.titulo} | Tauiker Store`;
+            const tipo    = getTipo(post);
+            const relProd = post.produto_relacionado ? postMap.get(post.produto_relacionado) : null;
+            const labels  = { review: '★ Review', blog: '✍ Blog', news: '📰 News' };
+
+            const rawContent = post.conteudo || `<p>${post.descricao || ''}</p>`;
+
+            const articleUrl = getSiteUrl(post);
+            setCanonical(articleUrl);
+
+            updateOG({
+                title:       `${post.titulo} | Tauiker Store`,
+                description: post.descricao || 'Leia este artigo na Tauiker Store.',
+                url:         articleUrl,
+                image:       post.imagem || CONFIG.OG_DEFAULT_IMAGE,
+                type:        'article'
+            });
+
+            const wordCount   = (post.conteudo || post.descricao || '').replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
+            const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+            const artCatLabel = post.categoria ? (post.categoria.charAt(0).toUpperCase() + post.categoria.slice(1)) : tipo;
+            const artCatHref  = tipo === 'news' ? '#/news' : `#/categoria/${tipo}`;
+            const breadcrumb = `
+            <nav class="breadcrumb" aria-label="Navegação estrutural"
+                 style="display:flex;align-items:center;gap:6px;font-size:0.72rem;color:var(--gray);margin-bottom:16px;flex-wrap:wrap">
+                <a href="#/" style="color:var(--gray);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--gray)'">Início</a>
+                <span aria-hidden="true" style="color:var(--gray-light)">›</span>
+                <a href="${artCatHref}" style="color:var(--gray);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--gray)'">${artCatLabel}</a>
+                <span aria-hidden="true" style="color:var(--gray-light)">›</span>
+                <span style="color:var(--primary);font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:200px">${post.titulo}</span>
+            </nav>`;
+
+            const artImgUrl = post.imagem ? optimizeImageUrl(post.imagem) : '';
+
+            setView(`
+                <div class="container single-container">
+                    ${breadcrumb}
+                    <a href="javascript:void(0)"
+                       onclick="window.navigatedInternally ? history.back() : (location.hash='#/')"
+                       class="btn-back" aria-label="Voltar">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar
+                    </a>
+                    <article class="single-article">
+                        ${post.imagem
+                            ? `<div class="article-hero">
+                                <img src="${artImgUrl}"
+                                     loading="eager"
+                                     fetchpriority="high"
+                                     decoding="async"
+                                     alt="${post.titulo}"
+                                     width="1200"
+                                     height="450"
+                                     style="width:100%;height:100%;object-fit:cover;">
+                               </div>`
+                            : ''}
+                        <header class="article-header">
+                            <div class="article-meta">
+                                <span class="type-badge type-badge--${tipo}">
+                                    ${labels[tipo] || tipo}
+                                </span>
+                                ${post.categoria ? `<span class="cat-tag">${post.categoria}</span>` : ''}
+                                <span class="cat-tag" aria-label="Tempo de leitura estimado">
+                                    <i class="fas fa-clock" style="font-size:0.55rem" aria-hidden="true"></i>
+                                    ${readingTime} min de leitura
+                                </span>
+                            </div>
+                            <h1>${post.titulo}</h1>
+                            ${post.descricao ? `<p class="article-subtitle">${post.descricao}</p>` : ''}
+                        </header>
+
+                        <div class="ad-slot ad-slot--article-top"
+                             aria-hidden="true"
+                             data-ad-position="article-top"></div>
+
+                        <div class="article-body" id="articleBodyContent" style="visibility:hidden">
+                            <p>${post.descricao || ''}</p>
+                        </div>
+
+                        <div class="ad-slot ad-slot--article-bottom"
+                             aria-hidden="true"
+                             data-ad-position="article-bottom"></div>
+
+                        ${buildProductWidget(relProd)}
+                        ${buildSimilarArticles(post)}
+
+                        <div class="ad-slot ad-slot--article-bottom"
+                             aria-hidden="true"
+                             data-ad-position="article-bottom-2"></div>
+
+                        ${buildLeadWidget(true)}
+                    </article>
+                </div>`,
+            () => {
+                const genAtRender = viewGeneration;
+                sanitize(rawContent).then(safeContent => {
+                    if (viewGeneration !== genAtRender) return;
+                    const contentHtml   = injectAdSlots(safeContent);
+                    const articleBodyEl = document.getElementById('articleBodyContent');
+                    if (articleBodyEl) {
+                        articleBodyEl.innerHTML = contentHtml;
+                        articleBodyEl.style.visibility = 'visible';
+                        activateAdSlotsIn(articleBodyEl);
+                    }
+                });
+                startReadingProgress();
+                /* [C5] fomo exclui artigo atual */
+                startFomoEngine(post.id);
+            });
+        }
+
+        /* [U2] busca remove campo conteudo — evita resultados ruidosos e lag */
+        let lastSearchResults = [];
+
+        const handleSearch = debounce(() => {
+            const input = document.getElementById('searchInput');
+            const term  = input?.value.toLowerCase().trim();
+            const box   = document.getElementById('searchBox');
+
+            if (box) box.classList.toggle('has-text', !!(input?.value.length));
+
+            if (!term) {
+                route(lastNonSearchHash || '#/');
+                return;
+            }
+
+            lastSearchResults = allPosts.filter(p =>
+                (p.titulo    || '').toLowerCase().includes(term) ||
+                (p.descricao || '').toLowerCase().includes(term) ||
+                (p.categoria || '').toLowerCase().includes(term)
+            );
+
+            window.applySearchFilters = () => {
+                const catFilter  = document.getElementById('searchFilterCat')?.value  || '';
+                const tipoFilter = document.getElementById('searchFilterTipo')?.value || '';
+                let filtered = lastSearchResults;
+                if (catFilter)  filtered = filtered.filter(p => (p.categoria || '').toLowerCase() === catFilter);
+                if (tipoFilter) filtered = filtered.filter(p => getTipo(p) === tipoFilter);
+                const grid = document.getElementById('searchResultsGrid');
+                if (grid) {
+                    grid.innerHTML = filtered.length === 0
+                        ? `<div class="empty-state" style="grid-column:1/-1" role="alert">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <h3>Nenhum resultado com esses filtros</h3>
+                            <p>Tente remover alguns filtros.</p>
+                           </div>`
+                        : filtered.map((p, i) => buildCard(p, i)).join('');
+                }
+            };
+
+            document.title = `Busca: "${term}" | Tauiker Store`;
+
+            setView(`
+                <div class="hero-banner hero-banner--sm">
+                    <div class="container">
+                        <h2>Busca: "${term}"</h2>
+                        <p>${lastSearchResults.length} ${lastSearchResults.length === 1 ? 'resultado encontrado' : 'resultados encontrados'}</p>
+                    </div>
+                </div>
+                <div class="ad-slot ad-slot--header-atf"
+                     aria-hidden="true"
+                     data-ad-position="atf"></div>
+                <div class="container page-feed">
+                    ${lastSearchResults.length === 0
+                        ? `<div class="empty-state" role="alert">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                            <h3>Nenhum resultado para "${term}"</h3>
+                            <p>Tente outro termo ou explore as categorias abaixo.</p>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px">
+                                ${Object.entries(CAT_NAMES).map(([slug, name]) =>
+                                    `<a href="#/categoria/${slug}" class="btn-buy" style="max-width:fit-content;padding:8px 16px;font-size:0.8rem">${name}</a>`
+                                ).join('')}
+                            </div>
+                           </div>`
+                        : `<div class="search-filter-bar" role="search" aria-label="Filtros de busca">
+                            <select id="searchFilterCat" onchange="window.applySearchFilters()" aria-label="Filtrar por categoria">
+                                <option value="">Todas as categorias</option>
+                                <option value="moda">Roupas</option>
+                                <option value="tech">Eletrônicos</option>
+                                <option value="casa">Casa</option>
+                                <option value="promo">Promoções</option>
+                            </select>
+                            <select id="searchFilterTipo" onchange="window.applySearchFilters()" aria-label="Filtrar por tipo">
+                                <option value="">Todos os tipos</option>
+                                <option value="produto">Produtos</option>
+                                <option value="review">Reviews</option>
+                                <option value="blog">Blog</option>
+                                <option value="news">Novidades</option>
+                            </select>
+                           </div>
+                           <div id="searchResultsGrid" class="products-grid">
+                            ${lastSearchResults.map((p, i) => buildCard(p, i)).join('')}
+                           </div>`
+                    }
+                </div>`, () => {
+                startFomoEngine();
+            });
+        }, 300);
+
+        document.getElementById('searchInput')?.addEventListener('input', handleSearch);
+
+        document.getElementById('searchClearBtn')?.addEventListener('click', () => {
+            const input = document.getElementById('searchInput');
+            const box   = document.getElementById('searchBox');
+            if (input) { input.value = ''; input.focus(); }
+            if (box) box.classList.remove('has-text');
+            route(lastNonSearchHash || '#/');
+        });
+
+        window.trackAffiliate = function(productId, productTitle, position) {
+            if (typeof gtag === 'function') {
+                gtag('event', 'affiliate_click', {
+                    event_category: 'monetization',
+                    event_label:    productTitle,
+                    product_id:     productId,
+                    click_position: position
+                });
+            }
+
+            if (productId) {
+                const affKey = 'ts_af_' + productId;
+                let alreadyTracked = false;
+                try { alreadyTracked = !!sessionStorage.getItem(affKey); } catch(_) {}
+
+                if (!alreadyTracked) {
+                    update(ref(db, 'posts/' + productId), { clicks: increment(1) })
+                        .catch(() => {});
+                    try { sessionStorage.setItem(affKey, '1'); } catch(_) {}
+                }
+            }
+        };
+
+        const navToggle  = document.getElementById('navToggle');
+        const navOverlay = document.getElementById('navOverlay');
+        const navDrawer  = document.getElementById('navDrawer');
+        const navClose   = document.getElementById('navClose');
+
+        const openNav  = () => {
+            document.body.classList.add('nav-open');
+            navToggle.setAttribute('aria-expanded', 'true');
+            navDrawer.setAttribute('aria-hidden', 'false');
+        };
+        const closeNav = () => {
+            document.body.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navDrawer.setAttribute('aria-hidden', 'true');
+        };
+
+        navToggle.addEventListener('click', openNav);
+        navOverlay.addEventListener('click', closeNav);
+        navClose.addEventListener('click', closeNav);
+        navDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+        const header = document.getElementById('mainHeader');
+        let scrollTicking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                requestAnimationFrame(() => {
+                    header.classList.toggle('header-scrolled', window.scrollY > 10);
+                    updateReadingProgress();
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        }, { passive: true });
+
+        /* Inicializar badge de wishlist ao carregar */
+        updateWishlistBadge();
+
+    </script>
+
+    <!-- [M3] Banner LGPD + Monetag condicional -->
+    <div id="lgpdBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:10000;background:var(--primary);color:rgba(255,255,255,0.9);padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 -4px 24px rgba(0,0,0,0.3);border-top:2px solid var(--accent)" role="dialog" aria-label="Aviso de cookies e privacidade">
+        <p style="flex:1;min-width:200px;font-size:0.8rem;line-height:1.5;margin:0">🍪 Usamos cookies e scripts de anúncios para melhorar sua experiência e manter o site gratuito. Ao continuar, você concorda com nossa <a href="#/politica" style="color:var(--accent);text-decoration:underline">Política de Privacidade</a>.</p>
+        <div style="display:flex;gap:8px;flex-shrink:0">
+            <button id="lgpdAccept" style="background:var(--accent);color:white;border:none;padding:9px 20px;border-radius:8px;font-weight:700;font-size:0.82rem;cursor:pointer;min-height:40px">Aceitar</button>
+            <button id="lgpdDecline" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);padding:9px 16px;border-radius:8px;font-weight:600;font-size:0.82rem;cursor:pointer;min-height:40px">Recusar</button>
+        </div>
+    </div>
+
+    <script>
+        function initMonetag() {
+            /* Vignette — com verificação de sessão para evitar pop-under a cada sessão */
+            try {
+                if (!sessionStorage.getItem('ts_vignette_shown')) {
+                    (function(s){s.dataset.zone='10904059';s.src='https://n6wxm.com/vignette.min.js'})(
+                        [document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script'))
+                    );
+                    sessionStorage.setItem('ts_vignette_shown', '1');
+                }
+            } catch(_) {}
+            /* Tag */
+            try {
+                (function(s){s.dataset.zone='10904060';s.src='https://nap5k.com/tag.min.js'})(
+                    [document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script'))
+                );
+            } catch(_) {}
+            /* ACT */
+            try {
+                var s = document.createElement('script');
+                s.src = 'https://5gvci.com/act/files/tag.min.js?z=10904061';
+                s.dataset.cfasync = 'false';
+                s.async = true;
+                document.body.appendChild(s);
+            } catch(_) {}
+        }
+
+        (function() {
+            var banner = document.getElementById('lgpdBanner');
+            var consent;
+            try { consent = localStorage.getItem('ts_consent'); } catch(_) {}
+
+            if (consent === '1') {
+                if (banner) banner.style.display = 'none';
+                initMonetag();
+                return;
+            }
+
+            if (banner) {
+                banner.style.display = 'flex';
+                document.getElementById('lgpdAccept').addEventListener('click', function() {
+                    try { localStorage.setItem('ts_consent', '1'); } catch(_) {}
+                    banner.style.display = 'none';
+                    initMonetag();
+                });
+                document.getElementById('lgpdDecline').addEventListener('click', function() {
+                    try { localStorage.setItem('ts_consent', '0'); } catch(_) {}
+                    banner.style.display = 'none';
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

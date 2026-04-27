@@ -1,0 +1,298 @@
+RELATÓRIO DE EVOLUÇÃO COMPLETA — TAUIKER STORE
+
+💰 MONETIZAÇÃO E VENDAS — PRIORIDADE MÁXIMA
+Problema 1 — Todos os 16 slots AdSense com string vazia: R$ 0 gerado
+Arquivo: index.html linhas 354–371 (CONFIG.AD_SLOTS)
+Receita perdida: 100% da receita AdSense — a infraestrutura está perfeita (IntersectionObserver, lazy activation, SPA reactivation, slotKeyMap completo para 16 posições), mas nenhuma unidade existe no painel do AdSense e nenhuma string está preenchida. O site tem ATF na home, ATF na categoria, ATF na busca, ATF no news, feed-1/2/3, feedInline-1/2/3, product-bottom, article-top, article-0/1/2, article-bottom, article-bottom-2 e anchor-mobile — zero ativo.
+Como resolver: Criar as 16 unidades no painel AdSense (ca-pub-9953522983252669), copiar os data-ad-slot gerados e preencher CONFIG.AD_SLOTS. Prioridade: atf, anchorMobile, productBottom, articleTop, articleBottom, feed1, feed2, desktopSticky.
+Problema 2 — Cliques inflados por duplo-incremento: dados de CTR corrompidos
+Arquivo: index.html linhas 2484–2495 (renderProductSingle)
+Receita perdida: Dados de analytics corrompidos dificultam decisões de catálogo; CTR do dashboard é calculado com cliques que incluem page views automáticos, não apenas cliques de afiliado.
+A função renderProductSingle() incrementa clicks via ts_ck_ na visualização da página (linha 2486) E trackAffiliate() incrementa novamente clicks quando o usuário clica no botão de compra (linha 2900–2902). O campo clicks acumula: 1 por sessão que abre a página + 1 por sessão que clica no link. O dashboard divide totalClicks/totalViews interpretando-os como CTR de afiliado, mas totalClicks inclui visualizações. O CTR exibido é sempre maior que o real.
+Como resolver: O incremento automático na abertura da página deve ir para views exclusivamente (já feito nas linhas 2492–2495). Remover a linha 2486 (clicks: increment(1)) do renderProductSingle — manter apenas o incremento de views por visita e deixar clicks exclusivamente para trackAffiliate().
+Problema 3 — API key da Anthropic exposta no lado do cliente com acesso total ao billing
+Arquivo: painel.html linha 2018–2020
+Receita perdida: A chave armazenada em localStorage é visível a qualquer pessoa com acesso ao computador do admin via DevTools → Application → Local Storage. Qualquer pessoa que acesse o computador do admin pode extrair a chave e gerar custos ilimitados na conta Anthropic.
+A implementação usa anthropic-dangerous-direct-browser-access: true como header, que contorna as restrições de CORS do navegador mas não protege a key. O localStorage não é criptografado. Se o admin usar um computador compartilhado ou uma sessão pública, a chave fica permanentemente exposta.
+Como resolver: Implementar um Firebase Cloud Function como proxy: a key fica na variável de ambiente do servidor, o painel envia apenas o prompt para a Function, e a Function faz a chamada à Anthropic. Custo zero adicional dentro do free tier do Firebase Functions.
+Problema 4 — Firebase config completa exposta em texto claro em dois arquivos públicos
+Arquivo: index.html linhas 336–344, painel.html linhas 1679–1687
+Receita perdida: Se as regras do Realtime Database permitirem escrita pública, qualquer pessoa pode injetar posts no site, inflar cliques, ou apagar todo o catálogo, eliminando receita de afiliado.
+A configuração completa (apiKey, authDomain, databaseURL, appId, storageBucket) está em texto claro. Isso é esperado para Firebase Web SDK, mas apenas se as Security Rules estiverem corretamente configuradas. Não há visibilidade das regras nos arquivos analisados.
+Como resolver: Confirmar nas Firebase Security Rules que: (a) posts/ permite write apenas para usuários autenticados, (b) leads/ permite write apenas no formato {email, timestamp, source} sem campos extras, (c) storage/ restringe upload a usuários autenticados. Adicionar restrição de domínio (tauiker.com e localhost) na API key no Console Firebase.
+Problema 5 — Lead capture sem automação: cada lead captado nunca recebe comunicação
+Arquivo: index.html linhas 2064–2070
+Receita perdida: O site captura e-mails com sucesso no Firebase Realtime Database (nó leads), mas não há webhook, Firebase Function ou integração com plataforma de e-mail. O admin só pode exportar CSV manualmente pelo painel. Leads frios = taxa de conversão próxima de zero.
+Como resolver: Criar Firebase Function com trigger onValueCreated no nó leads que dispara e-mail de boas-vindas via API Brevo (gratuito até 300 e-mails/dia). Segmentar por source (page hash) para personalizar o texto da primeira mensagem. Adicionar sequência de 3 e-mails: boas-vindas (imediato), melhores ofertas da semana (D+3), oferta exclusiva com desconto (D+7).
+Problema 6 — Grupos WhatsApp e Telegram no lead widget sem rastreamento de conversão
+Arquivo: index.html linhas 2009–2020
+Receita perdida: Os botões "Grupo WhatsApp" e "Canal Telegram" não têm evento de tracking. O admin não sabe quantos leads vieram pelo widget de e-mail versus pelos grupos sociais, impossibilitando otimização.
+Como resolver: Adicionar onclick="gtag('event','lead_click',{channel:'whatsapp'})" e onclick="gtag('event','lead_click',{channel:'telegram'})" nos respectivos botões. Adicionar parâmetros UTM nos links dos grupos para rastreamento no GA4.
+
+🛒 CONVERSÃO E JORNADA DE COMPRA
+Ponto de perda 1 — Clique na imagem do produto no card vai para página interna, não para o afiliado
+Onde ocorre: buildProductCard() linha 1728 — <a href="#/${tipo}/${p.id}" class="card-image-link">
+Impacto na conversão: Usuários mobile clicam naturalmente na imagem esperando ir à loja. Ao chegarem na página interna, enfrentam uma segunda decisão antes de converter. Cada página extra no funil reduz conversão em 20–40%.
+Como resolver: Manter o link interno na imagem para produtos com página interna rica (imagem grande, descrição, reviews), mas adicionar um botão de compra rápida (quick-buy overlay) visível no hover/tap da imagem. Alternativamente, fazer a imagem abrir o afiliado diretamente quando não há conteúdo adicional no post.
+Ponto de perda 2 — Hero score ignora produtos pinned: pinned correto mas score não é exibido
+Onde ocorre: index.html linha 763–774 (buildDynamicHero)
+Impacto na conversão: Produto com pinned: true é sempre mostrado no hero, mas o countdown, o Deal Score badge e os badges de desconto são calculados normalmente. Se o produto pinned tiver desconto zero, o hero exibe apenas o preço sem nenhum gatilho de urgência, reduzindo CTR do hero em 15–30%.
+Como resolver: Quando um produto pinned não tem desconto nem expira_em, injetar automaticamente um countdown de "oferta por tempo limitado" de 24h e a badge de scarcity mesmo sem os limites normais de desconto mínimo.
+Ponto de perda 3 — Static hero não tem CTA — primeiro acesso sem produtos tem deadend total
+Onde ocorre: index.html linhas 860–868 (buildStaticHero)
+Impacto na conversão: Quando o banco está vazio (acesso antes do primeiro post, ou Firebase offline), o hero exibe apenas "Tauiker Store / Qualidade em cada achadinho" sem nenhum botão. O usuário não tem nenhuma ação possível.
+Como resolver: Adicionar ao static hero 4 botões de categoria (Eletrônicos, Roupas, Casa, Promoções) e o link do grupo WhatsApp com a mensagem de comunidade. Custo de implementação: 8 linhas no buildStaticHero().
+Ponto de perda 4 — hero-cta__microcopy sem CSS: texto "Clique e confira disponibilidade" invisível
+Onde ocorre: index.html linha 794–796 (buildHeroHtml) — classe hero-cta__microcopy referenciada mas não definida em style.css
+Impacto na conversão: O microcopy de confiança abaixo do botão CTA (para produtos sem desconto) foi implementado no JS mas não tem regra CSS. Renderiza como texto inline sem estilo, provavelmente invisível ou misturado ao layout.
+Como resolver: Adicionar em style.css: .hero-cta__microcopy { display:block; font-size:0.68rem; color:rgba(255,255,255,0.6); margin-top:5px; }.
+Ponto de perda 5 — Modal de compartilhamento: mismatch de classes entre HTML e CSS
+Onde ocorre: index.html linha 216–240 (HTML do shareModal) vs style.css (regras geradas)
+Impacto na conversão: O HTML usa .share-modal__backdrop, .share-modal__box, .share-modal__options e modal.classList.add('visible'). O CSS gerado define .share-modal-overlay.open, .share-modal__opts e .share-modal__opt. O modal de compartilhamento não funciona visualmente — não aparece como overlay fixo e não tem estilo algum aplicado. Taxa de compartilhamento desktop = zero.
+Como resolver: Alinhar as classes CSS ao HTML existente: .share-modal.visible como estado ativo (não .open), .share-modal__options (não __opts), .share-modal__backdrop como overlay semitransparente com position:fixed;inset:0. Ou reescrever o HTML para usar as classes CSS definidas.
+Ponto de perda 6 — Botão de wishlist no header sem estilos: .wishlist-btn não definido em CSS
+Onde ocorre: index.html linha 170–175 — class="wishlist-btn" e class="wishlist-badge"
+Impacto na conversão: O botão de coração no header usa .wishlist-btn e .wishlist-badge, mas style.css define .header-wishlist-btn e .wishlist-count. O coração aparece sem formatação de botão, sem área de clique mínima de 44px e sem o badge de contagem estilizado. A funcionalidade existe mas o componente visual está quebrado.
+Como resolver: No style.css, renomear .header-wishlist-btn para .wishlist-btn e .wishlist-count para .wishlist-badge, ou ajustar o HTML para usar as classes CSS definidas.
+Ponto de perda 7 — buildVerificadoBadge gera .verificado-badge mas CSS define .badge-verificado
+Onde ocorre: index.html linha 1689 — class="verificado-badge" vs style.css .badge-verificado
+Impacto na conversão: O badge de "✓ Preço verificado" é o principal elemento de confiança para reduzir abandono antes do clique no afiliado. Está implementado no JS, aparece no HTML, mas não tem nenhum estilo aplicado — renderiza como texto puro sem background, border ou cor.
+Como resolver: Unificar a nomenclatura: alterar buildVerificadoBadge() para usar class="badge-verificado", ou alterar o CSS para .verificado-badge.
+Ponto de perda 8 — search-filter-bar no HTML vs .search-filters-bar no CSS
+Onde ocorre: index.html linha 2849 — class="search-filter-bar" vs style.css .search-filters-bar
+Impacto na conversão: Os filtros de busca (categoria + tipo) existem no JS e no HTML gerado, mas sem estilo algum — aparecem como selects soltos sem container, label ou alinhamento. A usabilidade é prejudicada, reduzindo uso dos filtros e refinamento de busca.
+Como resolver: Corrigir a classe HTML para search-filters-bar ou adicionar .search-filter-bar como alias no CSS.
+Ponto de perda 9 — Scarcity badge não ativa para produtos com alta demanda sem desconto
+Onde ocorre: index.html linha 1556 — if (!desc || desc < CONFIG.SCARCITY_MIN_DISCOUNT) return ''
+Impacto na conversão: Produtos sem desconto explícito mas com muitos cliques (alta demanda comprovada) nunca recebem badge de escassez. Um produto com 500 cliques e sem desconto tem menos urgência visual que um produto novo com 11% de desconto.
+Como resolver: Adicionar condição alternativa: if (p.clicks >= 20) { ativar scarcity baseada em demanda com mensagem "🔥 Alta demanda" }. Expandir SCARCITY_MIN_DISCOUNT para incluir produtos com clicks >= 20 independente do desconto.
+Ponto de perda 10 — Sem breadcrumb em páginas de categoria: navegação estrutural ausente
+Onde ocorre: index.html função renderCategoria() — ausente
+Impacto na conversão: renderProductSingle() e renderArticleSingle() têm breadcrumb. renderCategoria() tem apenas um hero banner com o nome. O usuário em "Eletrônicos" não vê "Início › Eletrônicos" e não tem clique rápido para voltar sem usar o menu dropdown.
+Como resolver: Adicionar o mesmo padrão de breadcrumb inline já usado nos singles: Início › Produtos › Eletrônicos antes do hero banner em renderCategoria().
+
+⚡ VELOCIDADE E PERFORMANCE
+Problema 1 — Todas as imagens passam por weserv.nl: single point of failure
+Arquivo: index.html linha 472–475 (optimizeImageUrl)
+Impacto: Se weserv.nl tiver downtime (ocorre ocasionalmente), TODAS as imagens do site quebram simultaneamente — hero, cards, singles. O site fica visualmente quebrado.
+Como resolver: Adicionar fallback no img onerror para carregar a URL original diretamente (img.onerror = () => { img.src = img.dataset.fallback; img.onerror = null; }). Adicionar data-fallback com a URL original antes de passar pelo proxy.
+Problema 2 — Quill 1.3.7 (2020) com vazamento de memória em sessões longas
+Arquivo: painel.html linhas 34–36, 1666
+Impacto: Admins que trabalham com muitos posts em uma sessão longa experimentam degradação progressiva do editor. Quill 1.3.7 não suporta paste moderno de imagens base64 e tem MutationObserver vazando em longos ciclos de edição.
+Como resolver: Migrar para Quill 2.x (CDN: cdn.quilljs.com/2.0.2/quill.js) ou considerar Trix Editor (mais leve, zero dependências). A API pública do Quill 2.x é compatível com 1.3.7 para os módulos usados (toolbar, snow theme).
+Problema 3 — DOMPurify carregado com async pode não estar disponível na sanitização
+Arquivo: index.html linhas 68–79
+Impacto: Em conexões lentas ou se o CDN de cloudflare falhar, window.domPurifyReady resolve com null. O fallback atual (regex de scripts e event handlers) é insuficiente — não bloqueia <iframe>, <object>, <embed>, SVG com handlers, nem URLs de dados maliciosas.
+Como resolver: Substituir o fallback regex por uma whitelist de tags permitidas com stripagem de tudo mais: html.replace(/<(?!\/?(?:p|h[2-4]|ul|ol|li|strong|em|a|img|blockquote|br|span|div)\b)[^>]+>/gi, ''). Considerar bundle local do DOMPurify no repositório para evitar dependência de CDN.
+Problema 4 — content-visibility: auto nos produtos-grid causa layout shift em scroll rápido
+Arquivo: style.css linha 824 (.products-grid) e 1269 (.news-card)
+Impacto: content-visibility: auto com contain-intrinsic-size: auto 380px é agressivo para grids variáveis. Em dispositivos lentos, o scroll produz reflow quando cards saem do viewport e voltam. O CLS (Cumulative Layout Shift) pode aumentar.
+Como resolver: Reduzir contain-intrinsic-size para auto 300px e testar com Lighthouse em mobile emulado. Considerar remover content-visibility dos news-cards (mais leves) e mantê-lo apenas no products-grid.
+Problema 5 — Font Awesome 6.5.0 carrega 3 arquivos CSS separados com preload
+Arquivo: index.html linhas 39–54
+Impacto: 3 requisições de CSS (fontawesome.min.css + solid.min.css + brands.min.css) via preload, mesmo que a maioria das ícones venha apenas do solid e brands. O fontawesome.min.css base é carregado desnecessariamente quando os demais já incluem o necessário.
+Como resolver: Usar o CSS unificado all.min.css do cdnjs em uma única requisição, ou usar Font Awesome Kit com apenas os ícones utilizados (subset). Reduz de 3 requests a 1.
+Problema 6 — Firebase onValue sem limitação de profundidade: todo o nó posts/ é baixado
+Arquivo: index.html linha 1189–1193
+Impacto: A query usa limitToLast(200) por timestamp, mas cada post inclui o campo conteudo (HTML rico completo de artigos, potencialmente kilobytes). Com 200 posts e artigos longos, o payload inicial pode chegar a vários MB.
+Como resolver: Criar nó separado posts_meta/ com apenas os campos necessários para listagem (titulo, descricao, tipo, categoria, imagem, preco, desconto, link, timestamp, clicks, expira_em, publish_at). O frontend carrega posts_meta/ para listagem e busca posts/{id}/conteudo somente ao abrir o artigo.
+
+🎨 DESIGN E EXPERIÊNCIA VISUAL
+Elemento 1 — wishlist-btn sem estilo visual: coração no header é texto bruto
+Arquivo: style.css — classe .wishlist-btn ausente
+Problema atual: O elemento <a href="#/wishlist" class="wishlist-btn"> com o ícone de coração não tem display:flex, align-items, min-width, min-height, border-radius nem padding. O coração aparece flutuando no header-right sem área de toque adequada (requisito mínimo de 44×44px).
+Melhoria sugerida: Definir .wishlist-btn { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; min-width:44px; min-height:44px; border-radius:var(--radius-sm); color:var(--gray); transition:color var(--t-fast),background var(--t-fast); position:relative; }.
+Impacto na conversão: Coração clicável e bem posicionado aumenta taxa de uso de wishlist em 2–3x.
+Elemento 2 — Cards sem avaliação por estrelas ou nota editorial
+Arquivo: index.html função buildProductCard()
+Problema atual: Nenhum card exibe nota. buildReviewBadge() mostra "Ver Review" quando há review, mas não exibe estrelas. O usuário não tem indicador visual de qualidade ao escanear o grid.
+Melhoria sugerida: Adicionar campo nota (0–5, float) no painel. No card, exibir estrelas preenchidas com ★★★★☆ via CSS puro ou spans coloridos. Para produtos sem nota, omitir o componente (não zero estrelas).
+Impacto na conversão: Produtos com avaliação visível têm CTR ~25% maior em estudos de e-commerce.
+Elemento 3 — Hero countdown aplica sempre 15min mesmo com expira_em distante
+Arquivo: index.html linha 822–825 (buildHeroHtml)
+Problema atual: O countdown do hero sempre exibe "Oferta expira em 15:00" por padrão, independente de expira_em do produto. Para produtos com oferta válida por 30 dias, exibir "15:00" é tecnicamente uma informação falsa que pode gerar desconfiança se o usuário retornar ao site e perceber que o contador "reiniciou".
+Melhoria sugerida: Quando expira_em é null e a oferta não tem data de expiração, substituir o countdown por um badge de "Oferta por tempo limitado" estático, sem contador. Usar o countdown real apenas quando expira_em existe.
+Impacto na conversão: Elimina risco de perda de credibilidade por countdown falso.
+Elemento 4 — Sem galeria de imagens múltiplas em páginas de produto
+Arquivo: index.html função renderProductSingle() — campo imagens_extra ausente
+Problema atual: A página de produto exibe apenas uma imagem, com zoom no hover. Para decidir comprar, o usuário vai ao afiliado para ver ângulos — aumentando risco de abandono sem conversão.
+Melhoria sugerida: Adicionar campo imagens_extra (array de até 3 URLs) no painel. No single, exibir thumbnails clicáveis abaixo da imagem principal com troca via JS. O zoom já existe via CSS scale(1.5).
+Impacto na conversão: 2–3 imagens extras reduzem significativamente o bounce para página de afiliado sem conversão.
+Elemento 5 — Badge "Deal Score" usa .badge-scarcity com background azul inline: violação de semântica
+Arquivo: index.html linha 1745–1747
+Problema atual: <div class="badge-scarcity" style="background:var(--accent);margin-bottom:6px"> sobrescreve o background laranja padrão do .badge-scarcity com azul inline. O badge de score usa a mesma classe visual de um badge de urgência, confundindo as hierarquias semânticas.
+Melhoria sugerida: Criar classe .badge-deal-score dedicada em style.css com background em gradiente azul-roxo (refletindo qualidade vs urgência). Remover o override inline.
+Impacto na conversão: Baixo individual, mas mantém consistência visual que aumenta confiabilidade geral.
+
+👤 FACILIDADE DE USO — VISITANTE DO SITE
+Ponto de fricção 1 — Busca sem recently viewed: usuário que busca e volta perde contexto
+Onde ocorre: handleSearch() — buildRecentlyViewed() não é chamado nos resultados de busca
+O que o usuário sente: Usuário busca "fone", vê 12 resultados, navega para um, volta — a busca recomeça do zero sem mostrar o que ele já viu.
+Como resolver: Adicionar buildRecentlyViewed() no HTML gerado por handleSearch(), logo abaixo dos filtros e acima do grid de resultados. Já está disponível na função.
+Ponto de fricção 2 — Wishlist mostra apenas produtos que ainda estão no postMap
+Onde ocorre: renderWishlist() linha 2382 — ids.map(id => postMap.get(id)).filter(Boolean)
+O que o usuário sente: Usuário salva 5 produtos. Admin remove 2 do Firebase. Usuário abre wishlist e vê apenas 3, sem saber que os outros "sumiram". Não há mensagem de "X itens indisponíveis", os IDs simplesmente são filtrados silenciosamente.
+Como resolver: Separar os IDs válidos dos inválidos. Para IDs sem postMap correspondente, mostrar card placeholder "Este produto não está mais disponível" com botão de remover da lista.
+Ponto de fricção 3 — Sem página de arquivo de ofertas expiradas
+Onde ocorre: Ausente como rota
+O que o usuário sente: Produto compartilhado via WhatsApp expire → usuário clica no link → vê "Item não encontrado" sem nenhum redirect ou sugestão de alternativa. Backlinks e tráfego orgânico para URLs de produtos expirados são perdidos.
+Como resolver: Quando renderSingle(id) não encontra o post no postMap, verificar se o post existe no Firebase com query direto. Se existir mas estiver expirado, renderizar página com "Esta oferta expirou" + produtos similares da mesma categoria. Se não existir, manter o 404 atual.
+Ponto de fricção 4 — Sem indicação de "produto sem link" antes de clicar
+Onde ocorre: buildProductCard() — o card exibe o botão cinza "Link indisponível" apenas após o usuário tentar interagir
+O que o usuário sente: O produto aparece normalmente no grid (com imagem, preço, badges), mas o único indicador de indisponibilidade é o botão de CTA acinzentado. Em mobile, o usuário pode não perceber e tentar clicar várias vezes.
+Como resolver: Adicionar overlay semitransparente position:absolute;inset:0; na .card-image-link quando !hasLink, com texto "Indisponível" em pequeno. Ou adicionar uma badge LINK INDISPONÍVEL no topo do card image, similar ao badge de desconto.
+Ponto de fricção 5 — Sem botão de "Compartilhar" na página de artigo (news/blog/review)
+Onde ocorre: renderArticleSingle() — ausente nos controles do artigo
+O que o usuário sente: Lê um artigo interessante, não encontra botão de compartilhamento. Tem que copiar a URL manualmente. Distribuição orgânica de conteúdo editorial = zero.
+Como resolver: Adicionar botão de share no article-header usando o mesmo nativeShare() já implementado para produtos, passando o título e URL do artigo.
+
+🛠️ FACILIDADE DE USO — ADMINISTRADOR DO PAINEL
+Ponto de fricção 1 — gerarDescricaoIA faz chamada direta ao navegador: CORS depende do header perigoso
+Função/tela afetada: painel.html linha 2014–2026 (fetch para api.anthropic.com)
+Problema atual: O header anthropic-dangerous-direct-browser-access: true é necessário porque browsers bloqueiam CORS para api.anthropic.com por padrão. Isso significa que a chamada funciona, mas a key fica visível no network tab do DevTools. Qualquer pessoa com acesso ao computador do admin (mesmo por 30 segundos) pode extrair a key e gerar custos ilimitados.
+Como resolver: Firebase Function como proxy. Função recebe apenas {titulo, categoria, preco} do painel, adiciona a key do ambiente servidor, chama a Anthropic e retorna apenas o texto. Custo: ~0 no free tier para volume de um admin.
+Ponto de fricção 2 — Campo verificado_em não tem botão "Verificar agora"
+Função/tela afetada: painel.html campo field-verificado
+Problema atual: O campo verificado_em exige que o admin selecione a data/hora manualmente via datetime-local input. Para verificar que o preço está correto agora, o admin precisa abrir o campo, navegar no calendário e selecionar a hora atual — 5 cliques desnecessários.
+Como resolver: Adicionar botão "📍 Agora" ao lado do input que preenche automaticamente com new Date().toISOString().slice(0,16). Custo: 3 linhas de JS.
+Ponto de fricção 3 — Autosave salva rascunho mas não alerta sobre conteúdo Quill não salvo
+Função/tela afetada: painel.html triggerAutosaveInternal() linha 1808
+Problema atual: O autosave captura o conteúdo do Quill via quillEditor.root.innerHTML apenas quando triggerAutosave() é chamado por um text-change event. Mas o rascunho em localStorage não inclui o conteúdo Quill nas chamadas feitas por outros campos (titulo, categoria, etc.) — triggerAutosaveInternal lê Quill apenas indiretamente.
+Analisando triggerAutosaveInternal (linha 1808–1828): o draft salva titulo, descricao, categoria, imagem, link, preco_*, pinned, publish_at, verificado_em, mas não o conteudo do Quill. Se o admin preenche um artigo de 800 palavras no Quill, fecha o navegador e o autosave foi disparado apenas por um campo de texto, o conteúdo do Quill é perdido.
+Como resolver: Incluir conteudo: quillEditor ? quillEditor.root.innerHTML : '' no objeto draft de triggerAutosaveInternal(). E em restaurarRascunho(), fazer quillEditor.clipboard.dangerouslyPasteHTML(draft.conteudo) se o conteúdo existir.
+Ponto de fricção 4 — Painel sem limite de rate para publicação: possível duplo-submit
+Função/tela afetada: painel.html salvarProduto() e atualizarProduto()
+Problema atual: O botão fica desabilitado durante o await push(), mas o estado btn.disabled = true ocorre apenas após a execução do código JS chegar à linha 2985. Se o admin clicar duas vezes muito rapidamente (antes do primeiro await completar), o segundo clique pode executar antes do btn.disabled = true ter efeito.
+Como resolver: Usar uma flag de estado (let isSubmitting = false) antes do try, verificada no início da função. Substituir a lógica de desabilitar botão por if (isSubmitting) return; isSubmitting = true;.
+Ponto de fricção 5 — Lista de posts não exibe visualizações (views) por item
+Função/tela afetada: painel.html carregarLista() — campo views ausente no item HTML
+Problema atual: Cada item da lista exibe cliques (.item-produto__clicks), mas não exibe views. O CTR por produto (cliques/views) é o indicador mais importante para decidir se um produto precisa de otimização de título/imagem. Sem isso, o admin vê "50 cliques" sem saber se foi de 50 views (100% CTR) ou 5.000 views (1% CTR).
+Como resolver: Adicionar ao .item-produto__meta um badge de views similar ao badge de cliques, e exibir CTR por produto: <span class="top5-item__ctr">${ctr}%</span>. A fórmula é ((p.clicks || 0) / Math.max(p.views || 1, 1) * 100).toFixed(1).
+Ponto de fricção 6 — Sem busca por URL/link de afiliado na lista do painel
+Função/tela afetada: painel.html carregarLista() — búsqueda filtrada apenas por título
+Problema atual: Quando o admin precisa encontrar todos os produtos de uma loja específica (ex.: todos os produtos Amazon), não há forma de filtrar por domínio do link de afiliado. A busca filtra apenas p.titulo.
+Como resolver: Expandir o filtro de busca para incluir p.link e p.descricao: (p.titulo || '').toLowerCase().includes(searchTerm) || (p.link || '').toLowerCase().includes(searchTerm). Adicionar opção de filtro por domínio de afiliado no filter-bar.
+
+🆕 FUNÇÕES QUE ESTÃO FALTANDO
+Nome: Firebase Cloud Function — proxy para API Anthropic
+Para quem resolve: Admin / Segurança
+Arquivo de destino: Firebase Functions (novo arquivo functions/index.js) + painel.html
+O que melhora: Remove a API key do cliente, elimina risco de exposição, habilita rate limiting por usuário autenticado, permite logging de uso da IA.
+Impacto estimado: Redução de 100% do risco de key leak; botão de IA continua funcionando igual para o admin.
+Nome: Web Push Notifications (PWA) — Service Worker + Manifest
+Para quem resolve: Visitante / Receita
+Arquivo de destino: Novo sw.js + manifest.json + index.html (botão opt-in em produto)
+O que melhora: Admin publica nova oferta → todos os inscritos recebem push imediato com foto, preço e link afiliado direto. Taxa de clique em push é 5–10x maior que e-mail para promoções.
+Impacto estimado: Canal de receita completamente novo; cada usuário inscrito vale 5–10 sessões adicionais por mês.
+Nome: Página #/deal-hunt — 5 maiores descontos das últimas 24h com countdown
+Para quem resolve: Visitante / CTR de afiliado / Compartilhamento orgânico
+Arquivo de destino: index.html (nova rota + renderDealHunt())
+O que melhora: Rota altamente compartilhável ("Maior desconto de hoje"). Filtra allPosts por timestamp > now - 86400000, ordena por desc, limita a 5. Adiciona countdown até meia-noite.
+Impacto estimado: Média de CTR de afiliado 40–60% maior em listas de "maior desconto".
+Nome: Sistema de alertas de preço por produto (Price Drop Alert)
+Para quem resolve: Visitante / Receita
+Arquivo de destino: index.html (botão "🔔 Avisar quando baixar") + Firebase Functions
+O que melhora: Visitante salva alerta de preço. Quando admin atualiza o preço para valor menor, Function dispara notificação. Cria loop de retenção sem dependência de redes sociais.
+Impacto estimado: CTR imediato pós-notificação é 5–15x maior que tráfego orgânico médio.
+Nome: Comparador de produtos (rota #/comparar)
+Para quem resolve: Visitante / Conversão
+Arquivo de destino: index.html (nova rota + renderComparar())
+O que melhora: Visitante que compara já está na fase de decisão. Manter a comparação dentro do site evita que ele vá ao Google e não volte. Mostrar até 3 produtos em grid lado a lado com preço, desconto, categoria e CTA.
+Impacto estimado: +20–35% em conversão para usuários que usam a função.
+Nome: Blacklist de domínios descartáveis no lead capture
+Para quem resolve: Admin / Qualidade da lista
+Arquivo de destino: index.html função submitLeadEmail()
+O que melhora: A regex atual /^[^\s@]+@[^\s@]+\.[^\s@]+$/ aceita qualquer domínio incluindo yopmail.com, mailinator.com, guerrillamail.com, throwaway.email e 200+ similares. Lista de leads limpa aumenta taxa de entrega e reduz bounce em campanhas.
+Impacto estimado: Elimina 20–40% de leads descartáveis; taxa de entrega de campanhas sobe 15–25%.
+Nome: Sitemap dinâmico e robots.txt
+Para quem resolve: SEO / Tráfego orgânico (receita indireta)
+Arquivo de destino: Novo sitemap.xml gerado via Firebase Function + robots.txt estático
+O que melhora: SPA com hash routing não é indexável eficientemente. Um sitemap.xml com as URLs canônicas de produtos e artigos aumenta indexação. Tráfego orgânico é o canal de receita de menor custo.
+Impacto estimado: +30–60% de tráfego orgânico em 60–90 dias após indexação.
+Nome: Widget "Oferta Relâmpago" — barra fixa no topo para posts com relampago: true
+Para quem resolve: Visitante / CTR de afiliado
+Arquivo de destino: index.html (barra topo) + painel.html (checkbox relampago)
+O que melhora: Oferta curta (30min–2h) marcada como relâmpago aparece acima do header para TODOS os visitantes durante o período, com countdown ao vivo. Quando expira, some automaticamente.
+Impacto estimado: CTR do afiliado 60–100% maior durante o período de relâmpago vs oferta normal.
+
+🔧 FUNÇÕES EXISTENTES QUE PODEM MELHORAR
+Nome: calcHeroScore — peso de clicks muito baixo (20%)
+Arquivo: index.html linha 735
+Problema atual: rawScore = price * 0.25 + discountBonus * 0.55 + Math.min(clicks, 200) * 0.20. Um produto barato com alto desconto sempre vence produtos com muita demanda comprovada. Produto R$50 com 40% OFF (score ~1.120) vence produto R$300 com 15% OFF e 500 cliques (score ~756), mesmo que o segundo converta melhor.
+O que melhora: Aumentar peso de clicks para 0.30, reduzir discountBonus para 0.50. Testar por 1 semana com métricas de CTR do hero.
+Impacto em receita: Alinha o hero com o que o público demonstra querer, aumentando CTR do hero em 10–20%.
+Nome: normalizeAffiliateLink — sem UTM campaign para diferenciar origem
+Arquivo: index.html linha 461–465
+Problema atual: Todos os links recebem utm_medium=affiliate e utm_content=productId, mas não há utm_campaign que diferencie se o clique veio do hero, de um card no feed, da wishlist, do fomo bar ou do sticky CTA.
+O que melhora: Adicionar parâmetro position à função (já disponível no trackAffiliate) e injetá-lo como utm_campaign=hero|card|wishlist|fomo|sticky. Permite análise de qual posição converte mais por produto.
+Impacto em receita: Permite otimização de posicionamento; identifica que o fomo bar converte 2x mais que o card para certos produtos.
+Nome: buildSectionedFeed — lead widget apenas após a primeira seção
+Arquivo: index.html linha 2144–2147
+Problema atual: O buildLeadWidget() é injetado logo após a primeira seção do feed (geralmente produtos). Em catálogos com muitos produtos, o lead widget aparece logo abaixo dos 5–8 primeiros cards, bem antes de o usuário ter engajado com o conteúdo.
+O que melhora: Mover o lead widget para depois da segunda seção (ou após sectionsRendered === 2). Usuários que passaram por dois blocos de conteúdo têm 3–4x mais intenção de conversão de lead.
+Impacto em receita: Reduz rejeição ao lead widget; aumenta taxa de conversão de e-mail em 15–25%.
+Nome: nativeShare — fallback mobile sem Web Share API vai para clipboard, não WhatsApp
+Arquivo: index.html linha 1406–1415
+Problema atual: Em mobile, se navigator.share não está disponível (WebView de alguns apps Android), o código cai para fallbackCopy(text) que copia para clipboard e mostra toast. O usuário espera compartilhar mas vê apenas "Link copiado".
+O que melhora: No fallback mobile (sem navigator.share), abrir https://wa.me/?text= diretamente como primeira opção, com a mesma UX que o desktop mas sem o modal.
+Impacto em receita: Aumenta compartilhamento orgânico em dispositivos com WebView, principal canal de tráfego referral em e-commerce brasileiro.
+Nome: activateAdSlotsIn — não reconhece slots com data-ad-init="empty" em renavegação SPA
+Arquivo: index.html linha 661–688
+Problema atual: initAdSlot() retorna imediatamente se slotEl.dataset.adInit existe (linha 612). O setView() deleta data-ad-init dos slots dentro do appEl (linha 1150–1152), mas apenas antes de activateAdSlotsIn(appEl). Se um slot teve adInit = "empty" (slot vazio por ID ausente), e o CONFIG.AD_SLOTS for preenchido dinamicamente (ex.: via Firebase Remote Config), o slot nunca é reatualizado na mesma sessão.
+O que melhora: Quando CONFIG.AD_SLOTS for preenchido após carregamento, forçar reinicialização global de todos os slots em appEl.
+Impacto em receita: Baixo no cenário atual (CONFIG é estático), mas crítico após implementação de Remote Config para AB tests de slots.
+Nome: formatDate — não localiza datas futuras (publish_at agendados)
+Arquivo: index.html linha 485–494 / painel.html linha 2070–2079
+Problema atual: formatDate(ts) calcula diff = Date.now() - ts. Para timestamps futuros (publish_at), diff é negativo, retornando valores absurdos como "-1000d atrás".
+O que melhora: Adicionar ramo para diffs negativos: if (diff < 0) { const future = Math.abs(diff); return 'em ' + (future < 3600000 ? Math.ceil(future/60000) + 'min' : future < 86400000 ? Math.ceil(future/3600000) + 'h' : Math.ceil(future/86400000) + 'd'); }.
+Impacto em UX: Elimina datas negativas no painel ao visualizar posts agendados.
+
+💡 INOVAÇÕES QUE AUMENTAM RECEITA E DIFERENCIAL
+Ideia 1 — Feed ao vivo com seção "🔴 AO VIVO — Nova oferta chegou!"
+Benefício direto: O Firebase onValue já detecta novos posts (linha 1220–1235) e exibe toast. Expandir para injetar automaticamente um card destacado no topo do feed com animação de entrada. Cada minuto a mais no site = mais impressões AdSense.
+Para quem impacta: Visitante / RPM AdSense / Retenção
+Complexidade: Baixa
+Ideia 2 — Score de curadoria "Tauiker Aprova" com badge editorial
+Benefício direto: Produtos verificados manualmente recebem badge "✅ Tauiker Aprova" com tooltip "Preço verificado e link ativo". Diferencia o site de simples agregadores de link. Confiança = menos abandono antes do clique no afiliado.
+Para quem impacta: Visitante (confiança) / CTR de afiliado / Diferencial competitivo
+Complexidade: Baixa (campo booleano tauiker_aprova no painel + badge visual no card)
+Ideia 3 — Integração Telegram Bot para publicação ultrarrápida de ofertas
+Benefício direto: Admin envia mensagem formatada ao bot → bot publica automaticamente via Firebase. Velocidade é crítica em afiliado: uma oferta relâmpago publicada 10 minutos antes de expirar gera 3x mais cliques que publicada 1h antes.
+Para quem impacta: Admin (produtividade) / Receita (mais posts = mais receita)
+Complexidade: Média
+Ideia 4 — Cashback simulado: "Você economiza R$ X com esta oferta"
+Benefício direto: Para produtos com desconto calculado, exibir uma linha "💰 Equivalente a X cafés de graça" ou "= X dias de Spotify" abaixo do preço. Converte economias abstratas em referências emocionais que aumentam conversão.
+Para quem impacta: Visitante / Conversão imediata
+Complexidade: Baixa (cálculo com referências pré-definidas)
+Ideia 5 — AB test automático de títulos do hero via Firebase Remote Config
+Benefício direto: Dois grupos de usuários veem CTAs diferentes no hero ("Comprar agora" vs "Ver oferta"). Firebase Remote Config rotaciona e mede qual converte mais via GA4 events. Otimização contínua de receita sem deploy.
+Para quem impacta: Receita / RPM / CTR do hero
+Complexidade: Média
+Ideia 6 — Página de afiliado com pré-saída: overlay "Você está saindo para loja parceira"
+Benefício direto: Antes de abrir o link externo, exibir por 2s um overlay com a imagem do produto, preço confirmado e "Lembre-se: use o link abaixo para garantir o preço". Reduz desistências por discrepância de preço e reforça confiança no momento de maior intenção.
+Para quem impacta: Visitante / CTR confirmado / Redução de chargeback percebido
+Complexidade: Baixa
+
+🗺️ TABELA DE PRIORIDADE GERAL
+PrioridadeItemCategoriaArquivoImpacto em ReceitaImpacto em UXComplexidadeP0Preencher os 16 slots AdSense vaziosMonetizaçãoindex.html CONFIG.AD_SLOTS🔴 Crítico (R$ 0 → positivo)Neutro1P0Corrigir duplo-incremento de clicksAnalyticsindex.html renderProductSingleAlto (dados corrompidos)Neutro1P0Alinhar classes share modal CSS/HTMLUX / Compartilhamentoindex.html + style.cssMédio🔴 Modal quebrado1P0Corrigir classes wishlist-btn / wishlist-badgeUX / Headerindex.html + style.cssMédio🔴 Coração sem estilo1P0Corrigir classe verificado-badge vs badge-verificadoConfiançaindex.html + style.cssMédio🔴 Badge sem estilo1P0Corrigir classe search-filter-bar vs search-filters-barUX / Buscaindex.html + style.cssBaixo🔴 Filtros sem estilo1P0Adicionar CSS hero-cta__microcopyConversãostyle.cssMédio (CTA sem texto visível)Alto1P1Firebase Function proxy para Anthropic APIAdmin / SegurançaFirebase Functions + painel.htmlMédio (produtividade)🔴 Segurança crítica3P1Botão "Verificar agora" em campo verificado_emAdmin UXpainel.htmlMédioAlto admin1P1Incluir conteudo Quill no autosaveAdmin UXpainel.htmlBaixo (produtividade)Alto admin2P1Views por item na lista do painel + CTR individualAdmin UXpainel.html carregarListaMédio (decisões de catálogo)Alto admin1P1Fallback de imagem weserv.nl com onerrorPerformanceindex.htmlMédio (uptime)Alto1P1Web Push Notifications (PWA)Receita / Retençãosw.js + index.htmlAlto (novo canal)Alto3P1Lead capture → Brevo automação e-mailReceita / LeadFirebase FunctionsAlto (canal novo)Neutro3P2Blacklist domínios descartáveis no leadQualidadeindex.htmlMédio (qualidade lista)Neutro1P2Página #/deal-hunt (maiores descontos 24h)Conversãoindex.htmlAlto (CTR alto)Alto2P2Scarcity badge para clicks >= 20 sem descontoConversãoindex.html buildScarcityBadgeMédioMédio1P2Breadcrumb em renderCategoria()UXindex.htmlBaixoMédio1P2Recently viewed nos resultados de buscaUXindex.html handleSearchBaixoAlto1P2Static hero com botões de CTAConversãoindex.html buildStaticHeroBaixoAlto1P2Galeria multi-imagem no produtoConversãoindex.html + painel.htmlMédioAlto3P2calcHeroScore peso clicks 20% → 30%Conversãoindex.htmlMédioNeutro1P2Flag isSubmitting para prevenir duplo-submitAdmin UXpainel.htmlBaixoAlto admin1P2Sitemap.xml + robots.txtSEOFirebase FunctionsMédio longo prazoNeutro3P3Avaliação por estrelas nos cardsDesign / Conversãoindex.html + painel.htmlMédioAlto2P3Badge "Produto sem link" visível no cardUXindex.htmlBaixoMédio1P3Botão compartilhar no artigo singleDistribuiçãoindex.htmlMédioAlto1P3Widget "Oferta Relâmpago" barra topoConversãoindex.html + painel.htmlAltoAlto2P3Comparador de produtos #/compararConversãoindex.htmlMédioAlto3P3Telegram Bot para publicaçãoAdmin produtividadeNovo serviçoMédioAlto admin4P3Página de oferta expirada com similaresSEO / UXindex.htmlMédio SEOAlto2P3Migrar Quill 1.3.7 → Quill 2.xPerformancepainel.htmlBaixoAlto admin2P3utm_campaign por posição de cliqueAnalyticsindex.htmlMédio (otimização)Neutro1P3Busca por URL de afiliado no painelAdmin UXpainel.htmlBaixoAlto admin1P3Wishlist: card placeholder para itens removidosUXindex.htmlBaixoAlto1P3formatDate para timestamps futurosBugindex.html + painel.htmlNeutroMédio1
+
+🚀 ROADMAP DE RECEITA
+Fase 1 — Dinheiro Imediato (0–48h)
+Criar as 16 unidades de anúncio no painel AdSense (ca-pub-9953522983252669) e preencher CONFIG.AD_SLOTS em index.html. Prioridade: atf, anchorMobile, productBottom, articleTop, articleBottom, feed1, feed2, desktopSticky. Estimativa de trabalho: 2h. Resultado: habilita 100% da infraestrutura AdSense existente.
+Corrigir os 7 mismatches de classes CSS/HTML em uma única sessão de edição: (1) .share-modal.visible → alinha overlay do modal de compartilhamento; (2) .wishlist-btn → estiliza botão de coração no header; (3) .wishlist-badge → estiliza badge de contagem; (4) .verificado-badge → estiliza badge de verificação; (5) .search-filter-bar → estiliza filtros de busca; (6) .hero-cta__microcopy → torna visível o texto de micro-copy do hero. Todas são alterações de CSS ou de uma linha no JS. Estimativa: 30min.
+Corrigir o duplo-incremento de cliques removendo a linha clicks: increment(1) do renderProductSingle() (linha 2486). Manter apenas o views: increment(1) para visualizações e trackAffiliate() para cliques reais. Isso limpa os dados do dashboard e do CTR médio. Estimativa: 2min.
+Fase 2 — Retenção e Recorrência (1–2 semanas)
+Implementar Firebase Cloud Function como proxy para a API Anthropic, eliminando a exposição da key no cliente. O botão "Gerar com IA" continua funcionando para o admin, mas a key fica protegida no servidor. Simultaneamente, adicionar blacklist de domínios descartáveis no lead widget.
+Criar Firebase Function com trigger onValueCreated no nó leads para envio automático de e-mail de boas-vindas via Brevo (gratuito até 300/dia). Segmentar pelo campo source para personalizar a mensagem por página de origem.
+Adicionar scarcity badge para produtos com clicks ≥ 20 independente de desconto, breadcrumb em páginas de categoria, buildRecentlyViewed() nos resultados de busca, botão "Ver agora" no campo verificado_em do painel, flag de prevenção de duplo-submit, e correção do autosave do Quill para incluir conteúdo do editor.
+Incluir views por item e CTR individual na lista do painel, dando ao admin os dados necessários para priorizar otimizações de título e imagem.
+Implementar fallback onerror nas imagens para carregar URL original quando weserv.nl falhar.
+Fase 3 — Escala e Dominância (2–4 semanas)
+Web Push Notifications completo: Service Worker, manifest.json, botão de opt-in contextual na página de produto, e Firebase Function para broadcast quando admin marcar post como enviar_push: true.
+Página #/deal-hunt com os 5 maiores descontos das últimas 24h, countdown até meia-noite e botão de compartilhamento nativo. Alta viralidade natural.
+Widget "Oferta Relâmpago" com barra fixa no topo do site (acima do header) para posts marcados com relampago: true, com countdown ao vivo e CTA direto para o afiliado.
+Galeria de imagens múltiplas no produto: campo imagens_extra no painel, thumbnails clicáveis no single com troca de imagem principal via JS.
+Comparador de produtos (#/comparar): até 3 produtos em grid lado a lado com botão "Comparar" nos cards.
+Sitemap.xml dinâmico gerado via Firebase Function com todas as URLs canônicas de produtos e artigos, aumentando indexação e tráfego orgânico.
+Migração de Quill 1.3.7 para Quill 2.x para eliminar vazamentos de memória em sessões longas do admin.
+Sistema de alertas de preço por produto: visitante salva alerta, Firebase Function dispara quando admin atualiza preço para valor menor.
